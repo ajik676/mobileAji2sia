@@ -12,8 +12,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AjikApps">
         <activity
+            android:name=".pertemuan3.ThirdResaultActivity"
+            android:exported="false" />
+        <activity
+            android:name=".pertemuan3.ThirdActivity"
+            android:exported="false" />
+        <activity
             android:name=".pertemuan2.SecondActivity"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,9 +28,7 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:exported="false">
-
-        </activity>
+            android:exported="false" />
     </application>
 
 </manifest>
