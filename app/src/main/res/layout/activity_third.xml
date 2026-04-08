@@ -51,7 +51,7 @@
         android:id="@+id/imageView"
         android:layout_width="225dp"
         android:layout_height="238dp"
-        android:src="@drawable/gamabr"
+        android:src="@drawable/download"
         tools:layout_editor_absoluteX="93dp"
         tools:layout_editor_absoluteY="27dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

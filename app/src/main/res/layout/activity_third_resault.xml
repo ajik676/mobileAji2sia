@@ -6,13 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".pertemuan3.ThirdResaultActivity">
-    <?xml version="1.0" encoding="utf-8"?>
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/main"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/design_default_color_secondary"
-        tools:context=".pertemuan3.ThirdActivity">
 
         <TextView
             android:id="@+id/textView3"
@@ -36,4 +29,3 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>

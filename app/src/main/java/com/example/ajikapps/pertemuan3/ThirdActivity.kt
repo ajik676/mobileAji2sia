@@ -1,4 +1,4 @@
-package com.example.athaya.pertemuan3
+package com.example.ajikapps.pertemuan3
 
 import android.content.Intent
 import android.os.Bundle
