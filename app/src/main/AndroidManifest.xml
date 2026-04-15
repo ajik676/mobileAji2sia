@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    package="com.example.ajikapps">
+
+    <!-- INTERNET untuk WebView -->
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:allowBackup="true"
@@ -11,27 +14,47 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AjikApps">
+
+        <!-- ✅ FIFTH JADI MAIN -->
+        <activity
+            android:name=".pertemuan_5.FifthActivity"
+            android:exported="true">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
+
+        <!-- WEBVIEW -->
+        <activity
+            android:name=".pertemuan_5.WebViewActivity"
+            android:exported="false" />
+
+        <!-- PERTEMUAN 4 -->
         <activity
             android:name=".pertemuan4.FourthActivity"
             android:exported="false" />
+
+        <!-- PERTEMUAN 3 -->
         <activity
             android:name=".pertemuan3.ThirdResaultActivity"
             android:exported="false" />
+
         <activity
             android:name=".pertemuan3.ThirdActivity"
             android:exported="false" />
+
+        <!-- PERTEMUAN 2 -->
         <activity
             android:name=".pertemuan2.SecondActivity"
-            android:exported="false"/>
+            android:exported="false" />
+
+        <!-- MAIN lama (opsional, tetap boleh ada) -->
         <activity
             android:name=".MainActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:exported="false" />
 
     </application>
 

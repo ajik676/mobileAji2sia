@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F8F9FA"> <com.google.android.material.appbar.AppBarLayout
+    android:id="@+id/appbar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+    app:elevation="4dp">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#FF0000" app:title="Tentang Aplikasi"
+        app:titleTextColor="@android:color/white"
+        app:subtitleTextColor="#E0E0E0"/>
+</com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:padding="16dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="@android:color/white"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="2dp"
+            android:layout_marginBottom="80dp"> <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Selamat Datang di Layanan Kami"
+                android:textColor="#121212"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="16dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Kami hadir dengan visi untuk memberikan solusi teknologi terbaik bagi kebutuhan Anda. Aplikasi ini dirancang secara khusus untuk mengedepankan efisiensi, kemudahan penggunaan, dan pengalaman pengguna yang luar biasa dalam setiap interaksi."
+                android:textColor="#424242"
+                android:textSize="15sp"
+                android:lineSpacingExtra="6dp"
+                android:layout_marginBottom="16dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Melalui platform ini, Anda dapat mengakses berbagai fitur unggulan yang terintegrasi secara cerdas. Kami terus melakukan pembaruan sistem secara berkala untuk memastikan stabilitas aplikasi dan menghadirkan inovasi terbaru yang relevan dengan perkembangan industri."
+                android:textColor="#424242"
+                android:textSize="15sp"
+                android:lineSpacingExtra="6dp"
+                android:layout_marginBottom="16dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Keamanan data dan privasi Anda adalah prioritas utama kami. Seluruh informasi yang diproses di dalam aplikasi telah dilindungi menggunakan teknologi enkripsi standar industri terkini, sehingga Anda dapat bertransaksi dan beraktivitas dengan rasa aman dan tenang."
+                android:textColor="#424242"
+                android:textSize="15sp"
+                android:lineSpacingExtra="6dp"
+                android:layout_marginBottom="16dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tim dukungan kami selalu siap membantu Anda kapan pun dibutuhkan. Jangan ragu untuk memanfaatkan fitur pusat bantuan atau menghubungi layanan pelanggan kami apabila Anda memiliki pertanyaan, kendala, atau masukan untuk pengembangan aplikasi ke depannya."
+                android:textColor="#424242"
+                android:textSize="15sp"
+                android:lineSpacingExtra="6dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Selamat Datang di Layanan Kami"
+                android:textColor="#121212"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="16dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Kami hadir dengan visi untuk memberikan solusi teknologi terbaik bagi kebutuhan Anda. Aplikasi ini dirancang secara khusus untuk mengedepankan efisiensi, kemudahan penggunaan, dan pengalaman pengguna yang luar biasa dalam setiap interaksi."
+                android:textColor="#424242"
+                android:textSize="15sp"
+                android:lineSpacingExtra="6dp"
+                android:layout_marginBottom="16dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Melalui platform ini, Anda dapat mengakses berbagai fitur unggulan yang terintegrasi secara cerdas. Kami terus melakukan pembaruan sistem secara berkala untuk memastikan stabilitas aplikasi dan menghadirkan inovasi terbaru yang relevan dengan perkembangan industri."
+                android:textColor="#424242"
+                android:textSize="15sp"
+                android:lineSpacingExtra="6dp"
+                android:layout_marginBottom="16dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Keamanan data dan privasi Anda adalah prioritas utama kami. Seluruh informasi yang diproses di dalam aplikasi telah dilindungi menggunakan teknologi enkripsi standar industri terkini, sehingga Anda dapat bertransaksi dan beraktivitas dengan rasa aman dan tenang."
+                android:textColor="#424242"
+                android:textSize="15sp"
+                android:lineSpacingExtra="6dp"
+                android:layout_marginBottom="16dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tim dukungan kami selalu siap membantu Anda kapan pun dibutuhkan. Jangan ragu untuk memanfaatkan fitur pusat bantuan atau menghubungi layanan pelanggan kami apabila Anda memiliki pertanyaan, kendala, atau masukan untuk pengembangan aplikasi ke depannya."
+                android:textColor="#424242"
+                android:textSize="15sp"
+                android:lineSpacingExtra="6dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Selamat Datang di Layanan Kami"
+                android:textColor="#121212"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="16dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Kami hadir dengan visi untuk memberikan solusi teknologi terbaik bagi kebutuhan Anda. Aplikasi ini dirancang secara khusus untuk mengedepankan efisiensi, kemudahan penggunaan, dan pengalaman pengguna yang luar biasa dalam setiap interaksi."
+                android:textColor="#424242"
+                android:textSize="15sp"
+                android:lineSpacingExtra="6dp"
+                android:layout_marginBottom="16dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Melalui platform ini, Anda dapat mengakses berbagai fitur unggulan yang terintegrasi secara cerdas. Kami terus melakukan pembaruan sistem secara berkala untuk memastikan stabilitas aplikasi dan menghadirkan inovasi terbaru yang relevan dengan perkembangan industri."
+                android:textColor="#424242"
+                android:textSize="15sp"
+                android:lineSpacingExtra="6dp"
+                android:layout_marginBottom="16dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Keamanan data dan privasi Anda adalah prioritas utama kami. Seluruh informasi yang diproses di dalam aplikasi telah dilindungi menggunakan teknologi enkripsi standar industri terkini, sehingga Anda dapat bertransaksi dan beraktivitas dengan rasa aman dan tenang."
+                android:textColor="#424242"
+                android:textSize="15sp"
+                android:lineSpacingExtra="6dp"
+                android:layout_marginBottom="16dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tim dukungan kami selalu siap membantu Anda kapan pun dibutuhkan. Jangan ragu untuk memanfaatkan fitur pusat bantuan atau menghubungi layanan pelanggan kami apabila Anda memiliki pertanyaan, kendala, atau masukan untuk pengembangan aplikasi ke depannya."
+                android:textColor="#424242"
+                android:textSize="15sp"
+                android:lineSpacingExtra="6dp"/>
+
+
+
+        </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/btnWebView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_margin="24dp"
+        android:text="KUNJUNGI WEBSITE"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        app:backgroundTint="#FD0000"
+        app:elevation="6dp"
+        app:hoveredFocusedTranslationZ="12dp"
+        app:pressedTranslationZ="12dp" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
