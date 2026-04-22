@@ -2,83 +2,63 @@ package com.example.ajikapps
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
+import android.widget.Button
+import android.widget.EditText
+import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import com.example.ajikapps.databinding.ActivityAuthBinding
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 
 class AuthActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityAuthBinding
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+        setContentView(R.layout.activity_auth)
 
-        binding = ActivityAuthBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        // 1. Handle System Bars (Edge-to-Edge padding)
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets
+        }
 
-        val sharedPref =
-            getSharedPreferences(
-                "user_pref",
-                MODE_PRIVATE
-            )
+        // 2. Initialize Views
+        val etUsername = findViewById<EditText>(R.id.etUsername)
+        val etPassword = findViewById<EditText>(R.id.etPassword)
+        val btnLogin = findViewById<Button>(R.id.btnLogin)
+        val sharedPref = getSharedPreferences("user_pref", MODE_PRIVATE)
 
-        binding.btnLogin.setOnClickListener {
+        //Kondisi jika isLogin bernilai true
+        val isLogin = sharedPref.getBoolean("isLogin", false)
+        if (isLogin) {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()//untuk menghapus auth
+            //Panggil Intent untuk ke MainActivity
+        }
+        // 3. Set Click Listener
+        btnLogin.setOnClickListener {
+            val username = etUsername.text.toString().trim()
+            val password = etPassword.text.toString().trim()
 
-            val username =
-                binding.edtUsername.text.toString().trim()
-
-            val password =
-                binding.edtPassword.text.toString().trim()
-
-            if (username.isEmpty()) {
-                binding.edtUsername.error = "Username wajib diisi"
-                return@setOnClickListener
-            }
-
-            if (password.isEmpty()) {
-                binding.edtPassword.error = "Password wajib diisi"
-                return@setOnClickListener
-            }
-
-            // Jika username = password login sukses
-            if (username == password) {
-
+            if (username == password && username.isNotEmpty()) {
                 val editor = sharedPref.edit()
-
-                editor.putBoolean(
-                    "isLogin",
-                    true
-                )
-
-                editor.putString(
-                    "username",
-                    username
-                )
-
+                editor.putBoolean("isLogin", true)
+                editor.putString("username",username)
                 editor.apply()
 
-                Toast.makeText(
-                    this,
-                    "Login Berhasil",
-                    Toast.LENGTH_SHORT
-                ).show()
-
-                // LANGSUNG MASUK KE BINA DESA
-                val intent = Intent(
-                    this,
-                    BinaDesa::class.java
-                )
-
+                val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
                 finish()
-
             } else {
 
-                Toast.makeText(
-                    this,
-                    "Username atau Password salah",
-                    Toast.LENGTH_SHORT
-                ).show()
+                AlertDialog.Builder(this)
+                    .setTitle("Login Gagal")
+                    .setMessage("Username dan Password harus sama dan tidak boleh kosong.")
+                    .setPositiveButton("OK", null)
+                    .show()
             }
         }
     }
