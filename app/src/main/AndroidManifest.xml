@@ -1,60 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.ajikapps">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- INTERNET untuk WebView -->
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
+        android:label="Bina Desa"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AjikApps">
+        android:theme="@style/Theme.AjikApps"
+        android:usesCleartextTraffic="true">
 
-        <!-- ✅ FIFTH JADI MAIN -->
         <activity
-            android:name=".pertemuan_5.FifthActivity"
+            android:name=".SplashScreenActivity"
             android:exported="true">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
 
-        <!-- WEBVIEW -->
         <activity
-            android:name=".pertemuan_5.WebViewActivity"
-            android:exported="false" />
-
-        <!-- PERTEMUAN 4 -->
-        <activity
-            android:name=".pertemuan4.FourthActivity"
-            android:exported="false" />
-
-        <!-- PERTEMUAN 3 -->
-        <activity
-            android:name=".pertemuan3.ThirdResaultActivity"
+            android:name=".BinaDesa"
             android:exported="false" />
 
         <activity
-            android:name=".pertemuan3.ThirdActivity"
+            android:name=".BinaDesaWebView"
             android:exported="false" />
 
-        <!-- PERTEMUAN 2 -->
-        <activity
-            android:name=".pertemuan2.SecondActivity"
-            android:exported="false" />
-
-        <!-- MAIN lama (opsional, tetap boleh ada) -->
-        <activity
-            android:name=".MainActivity"
-            android:exported="false" />
+        <activity android:name=".AuthActivity" android:exported="false" />
 
     </application>
 
