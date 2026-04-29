@@ -10,6 +10,7 @@ import androidx.core.view.WindowInsetsCompat
 import com.example.ajikapps.databinding.ActivityMainBinding
 import com.example.ajikapps.pertemuan4.FourthActivity
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.example.ajikapps.pertemuan7.Sevenctivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -33,6 +34,10 @@ class MainActivity : AppCompatActivity() {
             intent.putExtra("from", "Rumbai")
             intent.putExtra("age", 25)
 
+            startActivity(intent)
+        }
+        binding.btnToseven.setOnClickListener {
+            val intent = Intent(this, Sevenctivity::class.java)
             startActivity(intent)
         }
         binding.Logout.setOnClickListener{

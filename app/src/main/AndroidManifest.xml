@@ -14,10 +14,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AjikApps">
         <activity
+            android:name=".AuthActivity"
+            android:exported="false" />
+        <activity
             android:name=".pertemuan5.SplashScreenActivity"
             android:exported="false" />
         <activity
-            android:name=".AuthActivity"
+            android:name=".BaseActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -42,6 +45,9 @@
             android:exported="false" /> <!-- MAIN lama (opsional, tetap boleh ada) -->
         <activity
             android:name=".MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".pertemuan7.Sevenctivity"
             android:exported="false" />
     </application>
 
