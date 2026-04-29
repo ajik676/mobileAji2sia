@@ -1,4 +1,4 @@
-package More
+package com.example.ajikapps.Home.pertemuan7
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,8 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.ajikapps.R
 
-
-class MoreFragment : Fragment() {
+class TigaFragment : Fragment() {
 
 
     override fun onCreateView(
@@ -16,9 +15,8 @@ class MoreFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_more, container, false)
+        return inflater.inflate(R.layout.fragment_tiga, container, false)
     }
-
 
 
 }

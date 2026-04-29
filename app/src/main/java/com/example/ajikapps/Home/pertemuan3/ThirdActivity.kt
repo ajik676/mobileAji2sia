@@ -1,4 +1,4 @@
-package com.example.ajikapps.pertemuan3
+package com.example.ajikapps.Home.pertemuan3
 
 import android.content.Intent
 import android.os.Bundle
@@ -12,7 +12,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.ajikapps.R
 import com.example.ajikapps.databinding.ActivityThirdBinding
-import com.example.ajikapps.pertemuan3.ThirdResaultActivity
+import Home.pertemuan3.ThirdResaultActivity
 
 class ThirdActivity : AppCompatActivity() {
     private lateinit var binding: ActivityThirdBinding

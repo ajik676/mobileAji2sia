@@ -1,4 +1,4 @@
-package com.example.ajikapps.pertemuan7
+package com.example.ajikapps.Message
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import com.example.ajikapps.R
 
 
-class SatuFragment : Fragment() {
+class MessageFragment : Fragment() {
 
 
 
@@ -17,7 +17,7 @@ class SatuFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_satu, container, false)
+        return inflater.inflate(R.layout.fragment_message, container, false)
     }
 
 

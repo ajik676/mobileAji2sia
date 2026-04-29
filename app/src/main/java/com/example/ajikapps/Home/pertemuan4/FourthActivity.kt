@@ -1,4 +1,4 @@
-package com.example.ajikapps.pertemuan4
+package com.example.ajikapps.Home.pertemuan4
 
 import android.content.Intent
 import android.os.Bundle

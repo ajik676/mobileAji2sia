@@ -1,8 +1,8 @@
 package com.example.ajikapps
 
-import Home.HomeFragment
-import Message.MessageFragment
-import More.MoreFragment
+import com.example.ajikapps.Home.HomeFragment
+import com.example.ajikapps.Message.MessageFragment
+import com.example.ajikapps.More.MoreFragment
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
