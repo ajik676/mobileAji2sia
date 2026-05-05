@@ -1,71 +1,88 @@
-package com.example.ajikapps.Home
+package com.example.ajikapps.home
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.ajikapps.AuthActivity
-import com.example.ajikapps.R
+import androidx.appcompat.app.AlertDialog
+import androidx.fragment.app.Fragment
+import com.example.ajikapps.BinaDesaWebView
+import com.example.ajikapps.SplashScreenActivity
 import com.example.ajikapps.databinding.FragmentHomeBinding
-import android.content.Context.MODE_PRIVATE
-import com.example.ajikapps.Home.pertemuan4.FourthActivity
-import com.example.ajikapps.Home.pertemuan7.Sevenctivity
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
-
 
 class HomeFragment : Fragment() {
-
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
+    companion object {
+        fun newInstance(username: String): HomeFragment {
+            val fragment = HomeFragment()
+            val bundle = Bundle()
+            bundle.putString("username", username)
+            fragment.arguments = bundle
+            return fragment
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val sharedPref = requireContext().getSharedPreferences("user_pref", MODE_PRIVATE)
-        binding.btnToFourth.setOnClickListener {
-            val intent = Intent(requireContext(), FourthActivity::class.java)
+        super.onViewCreated(view, savedInstanceState)
 
-            intent.putExtra("name", "Politeknik Caltex Riau")
-            intent.putExtra("from", "Rumbai")
-            intent.putExtra("age", 25)
+        val sharedPref = requireActivity().getSharedPreferences(
+            "user_pref",
+            android.content.Context.MODE_PRIVATE
+        )
 
-            startActivity(intent)
+        val username = arguments?.getString("username") ?: "Pengguna"
+
+        // (opsional) tampilkan username kalau ada TextView
+        // binding.tvUsername.text = "Halo, $username"
+
+        // Tombol buka website
+        binding.btnWebsite.setOnClickListener {
+            startActivity(
+                Intent(requireContext(), BinaDesaWebView::class.java)
+            )
         }
-        binding.btnToseven.setOnClickListener {
-            val intent = Intent(requireContext(), Sevenctivity::class.java)
-            startActivity(intent)
-        }
-        binding.Logout.setOnClickListener{
-            MaterialAlertDialogBuilder(requireContext())
-                .setTitle("Konfirmasi")
-                .setMessage("Apakah Anda yakin ingin melanjutkan?")
+
+        // Tombol logout
+        binding.btnLogout.setOnClickListener {
+            AlertDialog.Builder(requireContext())
+                .setTitle("Konfirmasi Logout")
+                .setMessage("Yakin ingin logout?")
                 .setPositiveButton("Ya") { dialog, _ ->
+
+                    sharedPref.edit().clear().apply()
                     dialog.dismiss()
-                    val editor = sharedPref.edit()
-                    editor.clear()
-                    editor.apply()
-                    val intent = Intent(requireContext(), AuthActivity::class.java)
+
+                    val intent = Intent(
+                        requireContext(),
+                        SplashScreenActivity::class.java
+                    )
+
+                    intent.flags =
+                        Intent.FLAG_ACTIVITY_NEW_TASK or
+                                Intent.FLAG_ACTIVITY_CLEAR_TASK
+
                     startActivity(intent)
-                    Log.e("Info Dialog","Anda memilih Ya!")
-                }
-                .setNegativeButton("Batal") { dialog, _ ->
-                    dialog.dismiss()
-                    Log.e("Info Dialog","Anda memilih Tidak!")
                     requireActivity().finish()
                 }
+                .setNegativeButton("Tidak", null)
                 .show()
         }
     }
-}
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+}

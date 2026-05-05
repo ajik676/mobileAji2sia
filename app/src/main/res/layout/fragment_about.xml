@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F4F7F6"> <com.google.android.material.appbar.AppBarLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:backgroundTint="@android:color/white"
+    app:elevation="2dp">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:title="Tentang Aplikasi"
+        app:titleCentered="true"
+        app:titleTextColor="#212121"
+        app:layout_scrollFlags="scroll|enterAlways"/>
+</com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:paddingBottom="32dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="24dp">
+
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:src="@android:drawable/ic_menu_myplaces"
+                    app:tint="#2E7D32"
+                    android:layout_marginBottom="12dp"/>
+
+                <TextView
+                    android:id="@+id/tvTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Bina Desa"
+                    android:textSize="28sp"
+                    android:textStyle="bold"
+                    android:textColor="#1B5E20"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Layanan Mandiri Terpadu"
+                    android:textSize="16sp"
+                    android:textColor="#388E3C"
+                    android:textStyle="italic"
+                    android:layout_marginTop="4dp"/>
+            </LinearLayout>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="4dp"
+                app:strokeWidth="0dp"
+                android:layout_marginBottom="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp"
+                    android:background="@android:color/white">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Tentang Platform"
+                        android:textStyle="bold"
+                        android:textColor="#2E7D32"
+                        android:textSize="18sp"
+                        android:layout_marginBottom="12dp"/>
+
+                    <TextView
+                        android:id="@+id/tvDescription"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Aplikasi Bina Desa Layanan Mandiri hadir sebagai wujud nyata transformasi digital di tingkat pemerintahan desa (Smart Village). Kami berkomitmen untuk menjembatani kesenjangan informasi dan menghadirkan pelayanan publik yang prima, langsung ke genggaman masyarakat.\n\nMelalui ekosistem digital cerdas ini, warga tidak perlu lagi mengantre berjam-jam atau terkendala oleh jam operasional kantor desa. Seluruh kebutuhan administrasi dasar, mulai dari pengantar surat menyurat, pencatatan sipil, pelaporan warga, hingga akses transparansi dana desa, dapat diproses secara real-time, kapan saja, dan di mana saja dengan tingkat keamanan privasi data yang sangat terjamin."
+                        android:textSize="14sp"
+                        android:textColor="#424242"
+                        android:lineSpacingExtra="6dp"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="4dp"
+                app:strokeWidth="0dp"
+                android:layout_marginBottom="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp"
+                    android:background="#E8F5E9"> <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Visi &amp; Misi"
+                    android:textStyle="bold"
+                    android:textColor="#1B5E20"
+                    android:textSize="18sp"
+                    android:layout_marginBottom="12dp"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Visi:"
+                        android:textStyle="bold"
+                        android:textColor="#2E7D32"
+                        android:textSize="14sp"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Mewujudkan tata kelola desa yang inovatif, cerdas, transparan, dan inklusif dengan basis teknologi informasi mutakhir."
+                        android:textColor="#424242"
+                        android:textSize="14sp"
+                        android:lineSpacingExtra="4dp"
+                        android:layout_marginBottom="12dp"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Misi:"
+                        android:textStyle="bold"
+                        android:textColor="#2E7D32"
+                        android:textSize="14sp"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="1. Memangkas rantai birokrasi konvensional menjadi layanan digital satu pintu.\n2. Meningkatkan literasi digital masyarakat pedesaan.\n3. Mendorong partisipasi aktif dan pengawasan warga terhadap program pembangunan desa."
+                        android:textColor="#424242"
+                        android:textSize="14sp"
+                        android:lineSpacingExtra="4dp"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="4dp"
+                app:strokeWidth="0dp"
+                android:layout_marginBottom="24dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp"
+                    android:background="@android:color/white">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Fitur Unggulan"
+                        android:textStyle="bold"
+                        android:textColor="#2E7D32"
+                        android:textSize="18sp"
+                        android:layout_marginBottom="16dp"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="✓ Layanan Administrasi 24/7"
+                        android:textStyle="bold"
+                        android:textColor="#424242"
+                        android:textSize="14sp"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Pengajuan berbagai jenis surat keterangan secara mandiri dari rumah tanpa batas waktu."
+                        android:textColor="#757575"
+                        android:textSize="13sp"
+                        android:layout_marginBottom="12dp"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="✓ Pusat Informasi &amp; Transparansi"
+                        android:textStyle="bold"
+                        android:textColor="#424242"
+                        android:textSize="14sp"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Akses instan ke portal berita desa, pengumuman resmi, dan infografis Anggaran Pendapatan dan Belanja Desa (APBDes)."
+                        android:textColor="#757575"
+                        android:textSize="13sp"
+                        android:layout_marginBottom="12dp"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="✓ Lapor &amp; Aspirasi Warga"
+                        android:textStyle="bold"
+                        android:textColor="#424242"
+                        android:textSize="14sp"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Kanal komunikasi dua arah yang aman untuk melaporkan infrastruktur rusak atau menyampaikan gagasan kepada perangkat desa."
+                        android:textColor="#757575"
+                        android:textSize="13sp"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Bina Desa Layanan Mandiri v1.0.0\n© 2026 Pemerintah Desa Terpadu"
+                android:textAlignment="center"
+                android:textColor="#9E9E9E"
+                android:textSize="12sp"
+                android:lineSpacingExtra="2dp"/>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
