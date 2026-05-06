@@ -24,20 +24,21 @@ class AuthActivity : AppCompatActivity() {
             intent.putExtra("extra_username", sharedPref.getString("username", "Pengguna"))
             startActivity(intent)
             finish()
+            return
         }
 
         binding.btnLogin.setOnClickListener {
 
-            val username = binding.edtUsername.text.toString().trim()
-            val password = binding.edtPassword.text.toString().trim()
+            val username = binding.etUsername.text.toString().trim()
+            val password = binding.etPassword.text.toString().trim()
 
             if (username.isEmpty()) {
-                binding.edtUsername.error = "Username wajib diisi"
+                binding.etUsername.error = "Username wajib diisi"
                 return@setOnClickListener
             }
 
             if (password.isEmpty()) {
-                binding.edtPassword.error = "Password wajib diisi"
+                binding.etPassword.error = "Password wajib diisi"
                 return@setOnClickListener
             }
 
