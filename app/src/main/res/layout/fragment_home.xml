@@ -5,241 +5,366 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F4F7F6"> <com.google.android.material.appbar.AppBarLayout
+    android:background="#F5F7FA"> <androidx.core.widget.NestedScrollView
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:backgroundTint="@android:color/white"
-    app:elevation="2dp">
+    android:layout_height="match_parent"
+    android:clipToPadding="false"
+    android:paddingBottom="24dp">
 
-    <com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/toolbar"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:title="Beranda Desa"
-        app:titleCentered="true"
-        app:titleTextColor="#212121"
-        app:layout_scrollFlags="scroll|enterAlways"/>
-</com.google.android.material.appbar.AppBarLayout>
-
-    <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:clipToPadding="false"
-        android:paddingBottom="24dp"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="20dp">
+            android:background="@drawable/bg_dashboard_header"
+            android:paddingHorizontal="24dp"
+            android:paddingTop="48dp"
+            android:paddingBottom="40dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:layout_marginBottom="24dp">
+                android:gravity="center_vertical">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:src="@drawable/logoaji"
+                    android:scaleType="centerCrop"
+                    app:shapeAppearanceOverlay="@style/CircleImageView" /> <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_marginStart="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Selamat Datang,"
+                    android:textColor="#B0BEC5"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tvUsername"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Warga Desa"
+                    android:textColor="#FFFFFF"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
 
                 <ImageView
-                    android:layout_width="56dp"
-                    android:layout_height="56dp"
-                    android:src="@drawable/logo"
-                    app:tint="#E6D9D9" />
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:layout_marginStart="16dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Selamat Datang,"
-                        android:textColor="#757575"
-                        android:textSize="14sp"/>
-
-                    <TextView
-                        android:id="@+id/tvUsername"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Halo, Pengguna"
-                        android:textColor="#212121"
-                        android:textSize="22sp"
-                        android:textStyle="bold"/>
-                </LinearLayout>
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:src="@android:drawable/ic_popup_reminder"
+                    app:tint="#FFFFFF" />
             </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="-24dp"
+            android:paddingHorizontal="20dp">
 
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:cardCornerRadius="16dp"
                 app:cardElevation="8dp"
-                app:strokeWidth="0dp"
+                app:cardBackgroundColor="#FFFFFF"
                 android:layout_marginBottom="24dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:background="#E8F5E9" android:padding="24dp"
-                    android:gravity="center">
+                    android:orientation="horizontal"
+                    android:padding="20dp"
+                    android:gravity="center_vertical">
 
                     <ImageView
-                        android:layout_width="72dp"
-                        android:layout_height="72dp"
-                        android:src="@android:drawable/ic_menu_mapmode"
-                        app:tint="#000000"
-                        android:layout_marginBottom="12dp"/>
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:src="@android:drawable/ic_dialog_email"
+                        app:tint="#3498DB" />
 
-                    <TextView
-                        android:layout_width="match_parent"
+                    <LinearLayout
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="Bina Desa Layanan Mandiri"
-                        android:textAlignment="center"
-                        android:textColor="#000000"
-                        android:textStyle="bold"
-                        android:textSize="20sp"
-                        android:layout_marginBottom="8dp"/>
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:layout_marginStart="16dp">
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Akses layanan administrasi, surat menyurat, dan informasi desa secara online dengan cepat, mudah, dan transparan."
-                        android:textAlignment="center"
-                        android:textColor="#000000"
-                        android:textSize="14sp"
-                        android:lineSpacingExtra="4dp"
-                        android:layout_marginBottom="20dp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Status Surat Anda"
+                            android:textStyle="bold"
+                            android:textColor="#212121"
+                            android:textSize="16sp" />
 
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnWebsite"
-                        android:layout_width="match_parent"
-                        android:layout_height="56dp"
-                        android:text="Masuk Website Portal"
-                        app:icon="@android:drawable/ic_menu_view"
-                        app:iconGravity="textStart"
-                        app:cornerRadius="12dp"
-                        android:backgroundTint="#000000"
-                        android:textColor="@android:color/white"
-                        android:textSize="16sp"
-                        android:textStyle="bold"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="2 Surat Sedang Diproses"
+                            android:textColor="#757575"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@android:drawable/ic_media_next"
+                        app:tint="#9E9E9E" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Akses Cepat"
+                android:text="Layanan Desa"
                 android:textColor="#212121"
                 android:textStyle="bold"
                 android:textSize="18sp"
-                android:layout_marginBottom="16dp"/>
+                android:layout_marginBottom="12dp" />
 
-            <LinearLayout
+            <GridLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:weightSum="3"
-                android:layout_marginBottom="32dp"
-                android:baselineAligned="false">
+                android:columnCount="3"
+                android:rowCount="2"
+                android:alignmentMode="alignMargins"
+                android:columnOrderPreserved="false"
+                android:layout_marginBottom="24dp">
 
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_columnWeight="1"
                     android:orientation="vertical"
-                    android:gravity="center">
-                    <com.google.android.material.card.MaterialCardView
-                        android:layout_width="56dp"
-                        android:layout_height="56dp"
-                        app:cardCornerRadius="28dp"
-                        app:cardBackgroundColor="@android:color/white"
-                        app:strokeColor="#E0E0E0"
-                        app:strokeWidth="1dp"
-                        app:cardElevation="2dp">
-                        <ImageView
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:layout_gravity="center"
-                            android:src="@android:drawable/ic_menu_info_details"
-                            app:tint="#1976D2"/>
-                    </com.google.android.material.card.MaterialCardView>
+                    android:gravity="center"
+                    android:background="@drawable/bg_card_menu"
+                    android:padding="16dp"
+                    android:layout_margin="8dp">
+                    <ImageView
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:src="@android:drawable/ic_menu_edit"
+                        app:tint="#E74C3C" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Buat Surat"
+                        android:textSize="12sp"
+                        android:textColor="#424242"
+                        android:layout_marginTop="8dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:background="@drawable/bg_card_menu"
+                    android:padding="16dp"
+                    android:layout_margin="8dp">
+                    <ImageView
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:src="@android:drawable/ic_menu_info_details"
+                        app:tint="#2ECC71" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Info Desa"
                         android:textSize="12sp"
-                        android:layout_marginTop="8dp"
-                        android:textColor="#616161"/>
+                        android:textColor="#424242"
+                        android:layout_marginTop="8dp" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_columnWeight="1"
                     android:orientation="vertical"
-                    android:gravity="center">
-                    <com.google.android.material.card.MaterialCardView
-                        android:layout_width="56dp"
-                        android:layout_height="56dp"
-                        app:cardCornerRadius="28dp"
-                        app:cardBackgroundColor="@android:color/white"
-                        app:strokeColor="#E0E0E0"
-                        app:strokeWidth="1dp"
-                        app:cardElevation="2dp">
-                        <ImageView
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:layout_gravity="center"
-                            android:src="@android:drawable/ic_menu_edit"
-                            app:tint="#F57C00"/>
-                    </com.google.android.material.card.MaterialCardView>
+                    android:gravity="center"
+                    android:background="@drawable/bg_card_menu"
+                    android:padding="16dp"
+                    android:layout_margin="8dp">
+                    <ImageView
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:src="@android:drawable/ic_menu_report_image"
+                        app:tint="#F39C12" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Lapor"
+                        android:text="Pengaduan"
                         android:textSize="12sp"
-                        android:layout_marginTop="8dp"
-                        android:textColor="#616161"/>
+                        android:textColor="#424242"
+                        android:layout_marginTop="8dp" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_columnWeight="1"
                     android:orientation="vertical"
-                    android:gravity="center">
-                    <com.google.android.material.card.MaterialCardView
-                        android:layout_width="56dp"
-                        android:layout_height="56dp"
-                        app:cardCornerRadius="28dp"
-                        app:cardBackgroundColor="@android:color/white"
-                        app:strokeColor="#E0E0E0"
-                        app:strokeWidth="1dp"
-                        app:cardElevation="2dp">
-                        <ImageView
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:layout_gravity="center"
-                            android:src="@android:drawable/ic_menu_gallery"
-                            app:tint="#8E24AA"/>
-                    </com.google.android.material.card.MaterialCardView>
+                    android:gravity="center"
+                    android:background="@drawable/bg_card_menu"
+                    android:padding="16dp"
+                    android:layout_margin="8dp">
+                    <ImageView
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:src="@android:drawable/ic_menu_gallery"
+                        app:tint="#9B59B6" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Galeri"
                         android:textSize="12sp"
-                        android:layout_marginTop="8dp"
-                        android:textColor="#616161"/>
+                        android:textColor="#424242"
+                        android:layout_marginTop="8dp" />
                 </LinearLayout>
-            </LinearLayout>
 
-            <Space
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:background="@drawable/bg_card_menu"
+                    android:padding="16dp"
+                    android:layout_margin="8dp">
+                    <ImageView
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:src="@android:drawable/ic_menu_mapmode"
+                        app:tint="#1ABC9C" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Peta Desa"
+                        android:textSize="12sp"
+                        android:textColor="#424242"
+                        android:layout_marginTop="8dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:background="@drawable/bg_card_menu"
+                    android:padding="16dp"
+                    android:layout_margin="8dp">
+                    <ImageView
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:src="@android:drawable/ic_menu_help"
+                        app:tint="#34495E" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Bantuan"
+                        android:textSize="12sp"
+                        android:textColor="#424242"
+                        android:layout_marginTop="8dp" />
+                </LinearLayout>
+
+            </GridLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Kabar Terbaru"
+                android:textColor="#212121"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:layout_marginBottom="8dp" />
+
+            <HorizontalScrollView
                 android:layout_width="match_parent"
-                android:layout_height="16dp"/>
+                android:layout_height="wrap_content"
+                android:scrollbars="none"
+                android:layout_marginBottom="16dp">
+
+                <com.google.android.material.chip.ChipGroup
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:singleSelection="true"
+                    app:selectionRequired="true">
+
+                    <com.google.android.material.chip.Chip
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Semua"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:checked="true" />
+
+                    <com.google.android.material.chip.Chip
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Pengumuman"
+                        style="@style/Widget.MaterialComponents.Chip.Choice" />
+
+                    <com.google.android.material.chip.Chip
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Kegiatan Warga"
+                        style="@style/Widget.MaterialComponents.Chip.Choice" />
+
+                    <com.google.android.material.chip.Chip
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Bantuan Sosial"
+                        style="@style/Widget.MaterialComponents.Chip.Choice" />
+
+                </com.google.android.material.chip.ChipGroup>
+            </HorizontalScrollView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="2dp"
+                app:cardBackgroundColor="#FFFFFF"
+                android:layout_marginBottom="32dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Jadwal Gotong Royong Mingguan"
+                        android:textStyle="bold"
+                        android:textColor="#212121"
+                        android:textSize="16sp"
+                        android:layout_marginBottom="4dp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Diharapkan seluruh warga RW 03 untuk kumpul di balai desa pada hari Minggu..."
+                        android:textColor="#757575"
+                        android:textSize="14sp" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnLogout"
@@ -250,13 +375,15 @@
                 app:iconGravity="textStart"
                 app:cornerRadius="12dp"
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                app:strokeColor="#D32F2F"
+                app:strokeColor="#E74C3C"
                 app:strokeWidth="1.5dp"
-                android:textColor="#D32F2F"
+                android:textColor="#E74C3C"
                 android:textSize="16sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:layout_marginBottom="32dp"/>
 
         </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

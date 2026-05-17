@@ -1,5 +1,6 @@
 package com.example.ajikapps.home
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
-import com.example.ajikapps.BinaDesaWebView
 import com.example.ajikapps.SplashScreenActivity
 import com.example.ajikapps.databinding.FragmentHomeBinding
 
@@ -39,40 +39,42 @@ class HomeFragment : Fragment() {
 
         val sharedPref = requireActivity().getSharedPreferences(
             "user_pref",
-            android.content.Context.MODE_PRIVATE
+            Context.MODE_PRIVATE
         )
 
-        val username = arguments?.getString("username") ?: "Pengguna"
+        // 1. Mengambil username dari bundle, default "Warga Desa" jika kosong
+        val username = arguments?.getString("username") ?: "Warga Desa"
 
-        // (opsional) tampilkan username kalau ada TextView
-        // binding.tvUsername.text = "Halo, $username"
+        // 2. Mengubah teks pada TextView tvUsername agar menyapa user di Header
+        binding.tvUsername.text = username
 
-        // Tombol buka website
-        binding.btnWebsite.setOnClickListener {
-            startActivity(
-                Intent(requireContext(), BinaDesaWebView::class.java)
-            )
-        }
+        /* * CATATAN UNTUK MENU BARU:
+         * binding.btnWebsite dihapus karena di XML baru sudah diganti dengan GridLayout.
+         * Jika Anda ingin membuat menu "Buat Surat" atau "Info Desa" bisa diklik
+         * dan membuka WebView, Anda harus menambahkan ID di LinearLayout menu tersebut
+         * di dalam XML (contoh: android:id="@+id/menuBuatSurat"), lalu panggil di sini:
+         * * binding.menuBuatSurat.setOnClickListener {
+         * startActivity(Intent(requireContext(), BinaDesaWebView::class.java))
+         * }
+         */
 
-        // Tombol logout
+        // 3. Tombol Logout (Tetap menggunakan btnLogout dari XML baru)
         binding.btnLogout.setOnClickListener {
             AlertDialog.Builder(requireContext())
-                .setTitle("Konfirmasi Logout")
-                .setMessage("Yakin ingin logout?")
+                .setTitle("Konfirmasi Keluar")
+                .setMessage("Yakin ingin keluar dari akun Anda?")
                 .setPositiveButton("Ya") { dialog, _ ->
 
+                    // Hapus sesi user
                     sharedPref.edit().clear().apply()
                     dialog.dismiss()
 
+                    // Pindah ke halaman Splash/Login
                     val intent = Intent(
                         requireContext(),
                         SplashScreenActivity::class.java
                     )
-
-                    intent.flags =
-                        Intent.FLAG_ACTIVITY_NEW_TASK or
-                                Intent.FLAG_ACTIVITY_CLEAR_TASK
-
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                     startActivity(intent)
                     requireActivity().finish()
                 }
