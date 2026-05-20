@@ -1,6 +1,20 @@
 <resources>
     <string name="app_name">Ajik Apps</string>
     <string name="judul">Selamat Sore Dunia</string>
+    <string name="login">Login</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="name">Name</string>
+    <string name="terbaru">Terbaru</string>
+    <string name="penting">Penting</string>
+    <string name="belum_dibaca">Belum Dibaca</string>
+    <string name="pertemuan_9">Pertemuan 9</string>
+    <string name="menu_1">Menu 1</string>
+    <string name="menu_2">Menu 2</string>
+    <string name="menu_3">Menu 3</string>
+    <string name="menu_4">Menu 4</string>
+    <string name="menu_5">Menu 5</string>
+    <string name="menu_6">Menu 6</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

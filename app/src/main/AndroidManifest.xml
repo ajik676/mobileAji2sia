@@ -34,6 +34,12 @@
             android:name=".BinaDesaWebView"
             android:exported="false" />
         <activity
+            android:name=".home.pertemuan_9.NinthActivity"
+            android:exported="false" />
+        <activity
+            android:name=".home.pertemuan_10.TenthActivity"
+            android:exported="false" />
+        <activity
             android:name=".AuthActivity"
             android:exported="false" />
     </application>

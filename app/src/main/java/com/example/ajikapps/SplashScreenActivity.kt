@@ -38,7 +38,7 @@ class SplashScreenActivity : AppCompatActivity() {
 
                     Intent(
                         this@SplashScreenActivity,
-                        BinaDesa::class.java
+                        BaseActivity::class.java
                     )
 
                 } else {

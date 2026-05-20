@@ -1,4 +1,4 @@
-package com.example.ajikapps.Home.pertemuan2
+package com.example.ajikapps.home.pertemuan2
 
 import android.os.Bundle
 import android.util.Log

@@ -1,4 +1,4 @@
-package com.example.ajikapps.Home.pertemuan7
+package com.example.ajikapps.home.pertemuan7
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
