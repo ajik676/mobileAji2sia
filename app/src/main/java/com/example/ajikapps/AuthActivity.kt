@@ -29,7 +29,7 @@ class AuthActivity : AppCompatActivity() {
 
         val sharedPref = getSharedPreferences("user_pref", Context.MODE_PRIVATE)
 
-        // Cek login
+        // Cek loginn
         if (sharedPref.getBoolean("isLogin", false)) {
             val intent = Intent(this, BaseActivity::class.java)
             startActivity(intent)
