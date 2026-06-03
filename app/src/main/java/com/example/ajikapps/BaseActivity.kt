@@ -10,6 +10,8 @@ import com.example.ajikapps.databinding.ActivityBaseBinding
 import com.example.ajikapps.home.HomeFragment
 import com.example.ajikapps.about.AboutFragment
 import com.example.ajikapps.profile.ProfileFragment
+import com.example.ajikapps.Message.MessageFragment
+import com.example.ajikapps.More.MoreFragment
 
 class BaseActivity : AppCompatActivity() {
 
@@ -44,12 +46,12 @@ class BaseActivity : AppCompatActivity() {
                     replaceFragment(HomeFragment.newInstance(username))
                     true
                 }
-                R.id.about -> {
-                    replaceFragment(AboutFragment())
+                R.id.message -> {
+                    replaceFragment(MessageFragment())
                     true
                 }
-                R.id.profile -> {
-                    replaceFragment(ProfileFragment())
+                R.id.more -> {
+                    replaceFragment(MoreFragment())
                     true
                 }
                 else -> false

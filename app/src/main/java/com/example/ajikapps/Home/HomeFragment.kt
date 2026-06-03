@@ -8,8 +8,14 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ajikapps.SplashScreenActivity
+import com.example.ajikapps.data.api.CatFactApiClient
+import com.example.ajikapps.data.api.PhotoApiClient
 import com.example.ajikapps.databinding.FragmentHomeBinding
+import com.example.ajikapps.home.photo.PhotoAdapter
+import kotlinx.coroutines.launch
 import com.example.ajikapps.home.pertemuan2.SecondActivity
 import com.example.ajikapps.pertemuan_5.FifthActivity
 import com.example.ajikapps.home.pertemuan7.Sevenctivity
@@ -82,6 +88,15 @@ class HomeFragment : Fragment() {
             startActivity(Intent(requireContext(), TenthActivity::class.java))
         }
 
+        // Retrofit Cat Fact
+        loadCatFact()
+        binding.btnRefresh.setOnClickListener {
+            loadCatFact()
+        }
+
+        // Retrofit Gallery Photo
+        loadPhoto()
+
         // Tombol logout
         binding.btnLogout.setOnClickListener {
             AlertDialog.Builder(requireContext())
@@ -98,6 +113,30 @@ class HomeFragment : Fragment() {
                 }
                 .setNegativeButton("Tidak", null)
                 .show()
+        }
+    }
+
+    private fun loadCatFact() {
+        lifecycleScope.launch {
+            try {
+                val response = CatFactApiClient.apiService.getCatFact()
+                binding.tvCatFact.text = "\"${response.fact}\""
+            } catch (e: Exception) {
+                binding.tvCatFact.text = "Gagal mengambil fakta kucing."
+            }
+        }
+    }
+
+    private fun loadPhoto() {
+        lifecycleScope.launch {
+            try {
+                val photos = PhotoApiClient.apiService.getPhotos()
+                val adapter = PhotoAdapter(photos)
+                binding.rvGallery.adapter = adapter
+                binding.rvGallery.layoutManager = LinearLayoutManager(requireContext())
+            } catch (e: Exception) {
+                Toast.makeText(requireContext(), "Gagal memuat gambar", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 

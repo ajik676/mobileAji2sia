@@ -10,4 +10,5 @@
     <color name="backgroundColor">#F5F5F5</color>
     <color name="textColor">#212121</color>
     <color name="hintColor">#757575</color>
+    <color name="abu_gelap">#616161</color>
 </resources>
