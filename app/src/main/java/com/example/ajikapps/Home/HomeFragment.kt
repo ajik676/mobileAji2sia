@@ -1,31 +1,26 @@
 package com.example.ajikapps.home
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ajikapps.SplashScreenActivity
-import com.example.ajikapps.data.api.CatFactApiClient
-import com.example.ajikapps.data.api.PhotoApiClient
 import com.example.ajikapps.databinding.FragmentHomeBinding
-import com.example.ajikapps.home.photo.PhotoAdapter
-import kotlinx.coroutines.launch
-import com.example.ajikapps.home.pertemuan2.SecondActivity
-import com.example.ajikapps.pertemuan_5.FifthActivity
-import com.example.ajikapps.home.pertemuan7.Sevenctivity
-import com.example.ajikapps.home.pertemuan_9.NinthActivity
-import com.example.ajikapps.home.pertemuan_10.TenthActivity
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
+
+    private lateinit var newsViewModel: NewsViewModel
+    private lateinit var beritaAdapter: BeritaAdapter
 
     companion object {
         fun newInstance(username: String): HomeFragment {
@@ -50,63 +45,42 @@ class HomeFragment : Fragment() {
 
         val sharedPref = requireActivity().getSharedPreferences(
             "user_pref",
-            android.content.Context.MODE_PRIVATE
+            Context.MODE_PRIVATE
         )
 
-        // Pertemuan 2
-        binding.btnPertemuan2.setOnClickListener {
-            startActivity(Intent(requireContext(), SecondActivity::class.java))
+        // 1. Mengambil username dari bundle, default "Warga Desa" jika kosong
+        val username = arguments?.getString("username") ?: "Warga Desa"
+
+        // 2. Mengubah teks pada TextView tvUsername agar menyapa user di Header
+        binding.tvUsername.text = username
+
+        // 3. Setup RecyclerView untuk Berita
+        setupNewsRecyclerView()
+
+        // 4. Setup ViewModel untuk Berita
+        setupNewsViewModel()
+
+        // 5. Tombol Refresh/Coba Lagi Berita
+        binding.btnRefreshNews.setOnClickListener {
+            newsViewModel.fetchNews()
         }
 
-        // Pertemuan 3 (Contoh jika belum ada activity, tampilkan toast)
-        binding.btnPertemuan3.setOnClickListener {
-             Toast.makeText(requireContext(), "Halaman Pertemuan 3 belum tersedia", Toast.LENGTH_SHORT).show()
-        }
-
-        // Pertemuan 4 (Contoh jika belum ada activity, tampilkan toast)
-        binding.btnPertemuan4.setOnClickListener {
-            Toast.makeText(requireContext(), "Halaman Pertemuan 4 belum tersedia", Toast.LENGTH_SHORT).show()
-        }
-
-        // Pertemuan 5
-        binding.btnPertemuan5.setOnClickListener {
-            startActivity(Intent(requireContext(), FifthActivity::class.java))
-        }
-
-        // Pertemuan 7
-        binding.btnPertemuan7.setOnClickListener {
-            startActivity(Intent(requireContext(), Sevenctivity::class.java))
-        }
-
-        // Pertemuan 9
-        binding.btnPertemuan9.setOnClickListener {
-            startActivity(Intent(requireContext(), NinthActivity::class.java))
-        }
-
-        // Pertemuan 10
-        binding.btnPertemuan10.setOnClickListener {
-            startActivity(Intent(requireContext(), TenthActivity::class.java))
-        }
-
-        // Retrofit Cat Fact
-        loadCatFact()
-        binding.btnRefresh.setOnClickListener {
-            loadCatFact()
-        }
-
-        // Retrofit Gallery Photo
-        loadPhoto()
-
-        // Tombol logout
+        // 6. Tombol Logout (Tetap menggunakan btnLogout dari XML baru)
         binding.btnLogout.setOnClickListener {
             AlertDialog.Builder(requireContext())
-                .setTitle("Konfirmasi Logout")
-                .setMessage("Yakin ingin logout?")
+                .setTitle("Konfirmasi Keluar")
+                .setMessage("Yakin ingin keluar dari akun Anda?")
                 .setPositiveButton("Ya") { dialog, _ ->
+
+                    // Hapus sesi user
                     sharedPref.edit().clear().apply()
                     dialog.dismiss()
 
-                    val intent = Intent(requireContext(), SplashScreenActivity::class.java)
+                    // Pindah ke halaman Splash/Login
+                    val intent = Intent(
+                        requireContext(),
+                        SplashScreenActivity::class.java
+                    )
                     intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                     startActivity(intent)
                     requireActivity().finish()
@@ -116,28 +90,50 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun loadCatFact() {
-        lifecycleScope.launch {
-            try {
-                val response = CatFactApiClient.apiService.getCatFact()
-                binding.tvCatFact.text = "\"${response.fact}\""
-            } catch (e: Exception) {
-                binding.tvCatFact.text = "Gagal mengambil fakta kucing."
-            }
+    private fun setupNewsRecyclerView() {
+        beritaAdapter = BeritaAdapter(emptyList()) { news ->
+            MaterialAlertDialogBuilder(requireContext())
+                .setTitle(news.title)
+                .setMessage("${news.date}\n\n${news.description}")
+                .setPositiveButton("Tutup") { dialog, _ ->
+                    dialog.dismiss()
+                }
+                .show()
+        }
+
+        binding.rvBeritaNews.apply {
+            layoutManager = LinearLayoutManager(requireContext())
+            adapter = beritaAdapter
         }
     }
 
-    private fun loadPhoto() {
-        lifecycleScope.launch {
-            try {
-                val photos = PhotoApiClient.apiService.getPhotos()
-                val adapter = PhotoAdapter(photos)
-                binding.rvGallery.adapter = adapter
-                binding.rvGallery.layoutManager = LinearLayoutManager(requireContext())
-            } catch (e: Exception) {
-                Toast.makeText(requireContext(), "Gagal memuat gambar", Toast.LENGTH_SHORT).show()
+    private fun setupNewsViewModel() {
+        newsViewModel = ViewModelProvider(this)[NewsViewModel::class.java]
+
+        newsViewModel.newsState.observe(viewLifecycleOwner) { state ->
+            when (state) {
+                is NewsState.Loading -> {
+                    binding.progressBarNews.visibility = View.VISIBLE
+                    binding.rvBeritaNews.visibility = View.GONE
+                    binding.layoutEmptyStateNews.visibility = View.GONE
+                }
+                is NewsState.Success -> {
+                    binding.progressBarNews.visibility = View.GONE
+                    binding.layoutEmptyStateNews.visibility = View.GONE
+                    binding.rvBeritaNews.visibility = View.VISIBLE
+                    beritaAdapter.updateData(state.news)
+                }
+                is NewsState.Error -> {
+                    binding.progressBarNews.visibility = View.GONE
+                    binding.rvBeritaNews.visibility = View.GONE
+                    binding.layoutEmptyStateNews.visibility = View.VISIBLE
+                    binding.tvEmptyStateMessageNews.text = state.message
+                }
             }
         }
+
+        // Ambil berita saat awal dimuat
+        newsViewModel.fetchNews()
     }
 
     override fun onDestroyView() {

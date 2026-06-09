@@ -25,7 +25,7 @@ class AboutFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         (requireActivity() as AppCompatActivity).setSupportActionBar(binding.toolbar)
-        (requireActivity() as AppCompatActivity).supportActionBar?.title = "Aboutt"
+        (requireActivity() as AppCompatActivity).supportActionBar?.title = "Tentang Aplikasi"
     }
 
     override fun onDestroyView() {

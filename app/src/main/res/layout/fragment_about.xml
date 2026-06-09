@@ -141,78 +141,38 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:padding="24dp"
-                    android:background="#E8F5E9">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Visi &amp; Misi"
-                        android:textStyle="bold"
-                        android:textColor="#1B5E20"
-                        android:textSize="18sp"
-                        android:layout_marginBottom="16dp"/>
+                    android:background="#FFFFFF">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:layout_marginBottom="12dp">
-                        <View
-                            android:layout_width="4dp"
-                            android:layout_height="match_parent"
-                            android:background="#4CAF50"
-                            android:layout_marginEnd="12dp" />
-                        <LinearLayout
-                            android:layout_width="match_parent"
+                        android:gravity="center_vertical"
+                        android:layout_marginBottom="16dp">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@android:drawable/ic_menu_mapmode"
+                            app:tint="#2E7D32"
+                            android:layout_marginEnd="8dp"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical">
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="Visi:"
-                                android:textStyle="bold"
-                                android:textColor="#2E7D32"
-                                android:textSize="14sp"/>
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="Mewujudkan tata kelola desa yang inovatif, cerdas, transparan, dan inklusif dengan basis teknologi informasi mutakhir."
-                                android:textColor="#455A64"
-                                android:textSize="14sp"
-                                android:lineSpacingExtra="4dp"/>
-                        </LinearLayout>
+                            android:text="Informasi Desa"
+                            android:textStyle="bold"
+                            android:textColor="#1B5E20"
+                            android:textSize="18sp"/>
                     </LinearLayout>
 
-                    <LinearLayout
+                    <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-                        <View
-                            android:layout_width="4dp"
-                            android:layout_height="match_parent"
-                            android:background="#4CAF50"
-                            android:layout_marginEnd="12dp" />
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="Misi:"
-                                android:textStyle="bold"
-                                android:textColor="#2E7D32"
-                                android:textSize="14sp"/>
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="1. Memangkas rantai birokrasi konvensional menjadi layanan digital satu pintu.\n2. Meningkatkan literasi digital masyarakat pedesaan.\n3. Mendorong partisipasi aktif pengawasan warga."
-                                android:textColor="#455A64"
-                                android:textSize="14sp"
-                                android:lineSpacingExtra="4dp"/>
-                        </LinearLayout>
-                    </LinearLayout>
-
+                        android:text="Desa Bina Karya terletak di kawasan sentra digital terpadu. Sebagai pelopor program Smart Village, Desa Bina Karya berkomitmen memanfaatkan teknologi informasi untuk memberikan layanan administrasi yang cepat, transparan, dan inklusif kepada seluruh warganya."
+                        android:textSize="14sp"
+                        android:textColor="#546E7A"
+                        android:lineSpacingExtra="6dp"/>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
@@ -231,111 +191,110 @@
                     android:padding="24dp"
                     android:background="#FFFFFF">
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Fitur Unggulan"
-                        android:textStyle="bold"
-                        android:textColor="#1B5E20"
-                        android:textSize="18sp"
-                        android:layout_marginBottom="20dp"/>
-
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
+                        android:gravity="center_vertical"
                         android:layout_marginBottom="16dp">
 
                         <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:src="@drawable/ic_check_circle"
-                            android:layout_marginEnd="12dp"
-                            android:layout_marginTop="2dp"/>
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@android:drawable/ic_menu_call"
+                            app:tint="#2E7D32"
+                            android:layout_marginEnd="8dp"/>
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
+                        <TextView
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical">
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="Layanan Administrasi 24/7"
-                                android:textStyle="bold"
-                                android:textColor="#37474F"
-                                android:textSize="15sp"/>
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="Pengajuan surat keterangan secara mandiri tanpa batas waktu."
-                                android:textColor="#78909C"
-                                android:textSize="13sp"/>
-                        </LinearLayout>
+                            android:text="Kontak &amp; Detail Aplikasi"
+                            android:textStyle="bold"
+                            android:textColor="#1B5E20"
+                            android:textSize="18sp"/>
                     </LinearLayout>
 
+                    <!-- Versi -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:layout_marginBottom="16dp">
-
-                        <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:src="@drawable/ic_check_circle"
-                            android:layout_marginEnd="12dp"
-                            android:layout_marginTop="2dp"/>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
+                        android:layout_marginBottom="12dp">
+                        <TextView
+                            android:layout_width="120dp"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical">
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="Pusat Informasi &amp; Transparansi"
-                                android:textStyle="bold"
-                                android:textColor="#37474F"
-                                android:textSize="15sp"/>
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="Akses instan ke portal berita, pengumuman, dan infografis APBDes."
-                                android:textColor="#78909C"
-                                android:textSize="13sp"/>
-                        </LinearLayout>
+                            android:text="Versi Aplikasi"
+                            android:textColor="#78909C"
+                            android:textSize="14sp" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="v1.0.0 (Bina Desa Layanan Mandiri)"
+                            android:textColor="#37474F"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
                     </LinearLayout>
 
+                    <!-- Telepon -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="12dp">
+                        <TextView
+                            android:layout_width="120dp"
+                            android:layout_height="wrap_content"
+                            android:text="Telepon Kantor"
+                            android:textColor="#78909C"
+                            android:textSize="14sp" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="+62 21-1234567"
+                            android:textColor="#37474F"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <!-- Email -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="12dp">
+                        <TextView
+                            android:layout_width="120dp"
+                            android:layout_height="wrap_content"
+                            android:text="Email Desa"
+                            android:textColor="#78909C"
+                            android:textSize="14sp" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="info@binadesa.go.id"
+                            android:textColor="#37474F"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <!-- Website -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
-
-                        <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:src="@drawable/ic_check_circle"
-                            android:layout_marginEnd="12dp"
-                            android:layout_marginTop="2dp"/>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
+                        <TextView
+                            android:layout_width="120dp"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical">
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="Lapor &amp; Aspirasi Warga"
-                                android:textStyle="bold"
-                                android:textColor="#37474F"
-                                android:textSize="15sp"/>
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="Kanal komunikasi dua arah yang aman untuk menyampaikan gagasan."
-                                android:textColor="#78909C"
-                                android:textSize="13sp"/>
-                        </LinearLayout>
+                            android:text="Website Resmi"
+                            android:textColor="#78909C"
+                            android:textSize="14sp" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="www.binadesa.go.id"
+                            android:textColor="#37474F"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
                     </LinearLayout>
 
                 </LinearLayout>
@@ -344,7 +303,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Bina Desa Layanan Mandiri v1.0.0\n© 2026 Pemerintah Desa Terpadu"
+                android:text="Bina Desa Layanan Mandiri v1.0.0\n© 2026 Pemerintah Desa Bina Karya"
                 android:textAlignment="center"
                 android:textColor="#9E9E9E"
                 android:textSize="12sp"

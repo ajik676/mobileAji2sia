@@ -83,7 +83,8 @@
                 android:layout_height="wrap_content"
                 app:cardCornerRadius="20dp"
                 app:cardElevation="4dp"
-                app:strokeWidth="0dp">
+                app:strokeWidth="0dp"
+                android:layout_marginBottom="24dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -95,7 +96,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Kontak &amp; Sosial Media"
+                        android:text="Data Kependudukan"
                         android:textSize="14sp"
                         android:textStyle="bold"
                         android:textColor="#78909C"
@@ -109,86 +110,147 @@
                         android:background="#F0F0F0"
                         android:layout_marginBottom="8dp"/>
 
-                    <TextView
-                        android:id="@+id/tvEmail"
+                    <!-- NIK -->
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="hirzi.kurniawan@email.com"
-                        android:textColor="#455A64"
-                        android:textSize="15sp"
+                        android:orientation="horizontal"
                         android:paddingHorizontal="20dp"
-                        android:paddingVertical="16dp"
-                        android:background="?attr/selectableItemBackground"
-                        android:drawableStart="@android:drawable/ic_dialog_email"
-                        android:drawableTint="#2E7D32"
-                        android:drawablePadding="20dp"
-                        android:gravity="center_vertical"/>
+                        android:paddingVertical="12dp"
+                        android:gravity="center_vertical">
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/ic_profile"
+                            app:tint="#2E7D32"
+                            android:layout_marginEnd="16dp" />
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="NIK (Nomor Induk Kependudukan)"
+                                android:textColor="#90A4AE"
+                                android:textSize="12sp" />
+                            <TextView
+                                android:id="@+id/tvNik"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="3276051212990003"
+                                android:textColor="#37474F"
+                                android:textSize="15sp"
+                                android:textStyle="bold"
+                                android:layout_marginTop="2dp" />
+                        </LinearLayout>
+                    </LinearLayout>
 
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:background="#F0F0F0"
-                        android:layout_marginStart="64dp"/>
+                        android:layout_marginStart="60dp"/>
 
-                    <TextView
-                        android:id="@+id/tvLinkedIn"
+                    <!-- Nomor Telepon -->
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="linkedin.com/in/mhirzikurniawan"
-                        android:textColor="#455A64"
-                        android:textSize="15sp"
+                        android:orientation="horizontal"
                         android:paddingHorizontal="20dp"
-                        android:paddingVertical="16dp"
-                        android:background="?attr/selectableItemBackground"
-                        android:drawableStart="@android:drawable/ic_menu_share"
-                        android:drawableTint="#0077B5"
-                        android:drawablePadding="20dp"
-                        android:gravity="center_vertical"/>
+                        android:paddingVertical="12dp"
+                        android:gravity="center_vertical">
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@android:drawable/ic_menu_call"
+                            app:tint="#2E7D32"
+                            android:layout_marginEnd="16dp" />
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Nomor Telepon"
+                                android:textColor="#90A4AE"
+                                android:textSize="12sp" />
+                            <TextView
+                                android:id="@+id/tvPhone"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="+62 812-3456-7890"
+                                android:textColor="#37474F"
+                                android:textSize="15sp"
+                                android:textStyle="bold"
+                                android:layout_marginTop="2dp" />
+                        </LinearLayout>
+                    </LinearLayout>
 
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:background="#F0F0F0"
-                        android:layout_marginStart="64dp"/>
+                        android:layout_marginStart="60dp"/>
 
-                    <TextView
-                        android:id="@+id/tvGithub"
+                    <!-- Alamat -->
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="github.com/mhirzikurniawan"
-                        android:textColor="#455A64"
-                        android:textSize="15sp"
+                        android:orientation="horizontal"
                         android:paddingHorizontal="20dp"
-                        android:paddingVertical="16dp"
-                        android:background="?attr/selectableItemBackground"
-                        android:drawableStart="@android:drawable/ic_menu_manage"
-                        android:drawableTint="#333333"
-                        android:drawablePadding="20dp"
-                        android:gravity="center_vertical"/>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="#F0F0F0"
-                        android:layout_marginStart="64dp"/>
-
-                    <TextView
-                        android:id="@+id/tvInstagram"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="mhirzi.kurniawan"
-                        android:textColor="#455A64"
-                        android:textSize="15sp"
-                        android:paddingHorizontal="20dp"
-                        android:paddingVertical="16dp"
-                        android:background="?attr/selectableItemBackground"
-                        android:drawableStart="@android:drawable/ic_menu_camera"
-                        android:drawableTint="#E1306C"
-                        android:drawablePadding="20dp"
-                        android:gravity="center_vertical"/>
+                        android:paddingVertical="12dp"
+                        android:gravity="center_vertical">
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@android:drawable/ic_menu_mapmode"
+                            app:tint="#2E7D32"
+                            android:layout_marginEnd="16dp" />
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Alamat KTP"
+                                android:textColor="#90A4AE"
+                                android:textSize="12sp" />
+                            <TextView
+                                android:id="@+id/tvAddress"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Jl. Merdeka No. 12, RT 01/RW 02, Desa Bina Karya"
+                                android:textColor="#37474F"
+                                android:textSize="15sp"
+                                android:textStyle="bold"
+                                android:layout_marginTop="2dp" />
+                        </LinearLayout>
+                    </LinearLayout>
 
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnLogout"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:text="Keluar Akun"
+                app:icon="@android:drawable/ic_lock_power_off"
+                app:iconGravity="textStart"
+                app:cornerRadius="12dp"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                app:strokeColor="#E74C3C"
+                app:strokeWidth="1.5dp"
+                android:textColor="#E74C3C"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="32dp"/>
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
