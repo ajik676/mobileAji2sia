@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    app:cardCornerRadius="20dp"
+    app:cardElevation="2dp"
+    app:strokeColor="@color/border"
+    app:strokeWidth="1dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?android:attr/selectableItemBackground">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <!-- Icon Container -->
+        <FrameLayout
+            android:id="@+id/iconContainer"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@drawable/circle_icon_bg"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/ivIcon"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="center"
+                android:contentDescription="Icon Layanan"
+                android:src="@drawable/ic_mail"
+                app:tint="@color/primary" />
+
+        </FrameLayout>
+
+        <!-- Nama Surat Title -->
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="Nama Surat"
+            android:textColor="@color/text_primary"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iconContainer" />
+
+        <!-- Deskripsi Singkat -->
+        <TextView
+            android:id="@+id/tvDescription"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text="Deskripsi singkat mengenai layanan surat ini."
+            android:textColor="@color/text_secondary"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvTitle" />
+
+        <!-- Action / Click Target -->
+        <TextView
+            android:id="@+id/tvDetailAction"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Lihat Detail"
+            android:textColor="@color/primary"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvDescription" />
+
+        <ImageView
+            android:layout_width="14dp"
+            android:layout_height="14dp"
+            android:layout_marginStart="4dp"
+            android:src="@android:drawable/ic_media_next"
+            app:tint="@color/primary"
+            app:layout_constraintBottom_toBottomOf="@id/tvDetailAction"
+            app:layout_constraintStart_toEndOf="@id/tvDetailAction"
+            app:layout_constraintTop_toTopOf="@id/tvDetailAction" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>
