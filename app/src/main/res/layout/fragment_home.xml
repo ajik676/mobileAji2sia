@@ -16,6 +16,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <!-- Header Section -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -36,38 +37,44 @@
                     android:layout_height="64dp"
                     android:src="@drawable/logoaji"
                     android:scaleType="centerCrop"
-                    app:shapeAppearanceOverlay="@style/CircleImageView" /> <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:layout_marginStart="16dp">
+                    app:strokeColor="@color/white"
+                    app:strokeWidth="2dp"
+                    app:shapeAppearanceOverlay="@style/CircleImageView" />
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Selamat Datang,"
-                    android:textColor="#B0BEC5"
-                    android:textSize="14sp" />
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_marginStart="16dp">
 
-                <TextView
-                    android:id="@+id/tvUsername"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Warga Desa"
-                    android:textColor="#FFFFFF"
-                    android:textSize="24sp"
-                    android:textStyle="bold" />
-            </LinearLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Selamat Datang,"
+                        android:textColor="#B0BEC5"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/tvUsername"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Warga Desa"
+                        android:textColor="#FFFFFF"
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
 
                 <ImageView
                     android:layout_width="28dp"
                     android:layout_height="28dp"
-                    android:src="@android:drawable/ic_popup_reminder"
-                    app:tint="#FFFFFF" />
+                    android:src="@drawable/ic_notification"
+                    app:tint="#FFFFFF"
+                    android:contentDescription="Notification Icon" />
             </LinearLayout>
         </LinearLayout>
 
+        <!-- Content Body (Overlapping Header) -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -75,12 +82,15 @@
             android:layout_marginTop="-24dp"
             android:paddingHorizontal="20dp">
 
+            <!-- Status Card -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="8dp"
-                app:cardBackgroundColor="#FFFFFF"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="2dp"
+                app:strokeColor="@color/border"
+                app:strokeWidth="1dp"
+                app:cardBackgroundColor="@color/white"
                 android:layout_marginBottom="24dp">
 
                 <LinearLayout
@@ -90,11 +100,20 @@
                     android:padding="20dp"
                     android:gravity="center_vertical">
 
-                    <ImageView
+                    <FrameLayout
                         android:layout_width="48dp"
                         android:layout_height="48dp"
-                        android:src="@android:drawable/ic_dialog_email"
-                        app:tint="#3498DB" />
+                        android:background="@drawable/circle_icon_bg"
+                        android:backgroundTint="@color/primary_light">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_mail"
+                            app:tint="@color/primary"
+                            android:contentDescription="Mail Icon" />
+                    </FrameLayout>
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -108,34 +127,38 @@
                             android:layout_height="wrap_content"
                             android:text="Status Surat Anda"
                             android:textStyle="bold"
-                            android:textColor="#212121"
+                            android:textColor="@color/text_primary"
                             android:textSize="16sp" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
                             android:text="2 Surat Sedang Diproses"
-                            android:textColor="#757575"
+                            android:textColor="@color/text_secondary"
                             android:textSize="14sp" />
                     </LinearLayout>
 
                     <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:src="@android:drawable/ic_media_next"
-                        app:tint="#9E9E9E" />
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/ic_arrow_forward"
+                        app:tint="@color/text_secondary"
+                        android:contentDescription="Next Page" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
+            <!-- Services Section Title -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Layanan Desa"
-                android:textColor="#212121"
+                android:textColor="@color/text_primary"
                 android:textStyle="bold"
                 android:textSize="18sp"
                 android:layout_marginBottom="12dp" />
 
+            <!-- Service Menu Grid -->
             <GridLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -145,6 +168,7 @@
                 android:columnOrderPreserved="false"
                 android:layout_marginBottom="24dp">
 
+                <!-- 1. Buat Surat -->
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -152,22 +176,37 @@
                     android:orientation="vertical"
                     android:gravity="center"
                     android:background="@drawable/bg_card_menu"
-                    android:padding="16dp"
-                    android:layout_margin="8dp">
-                    <ImageView
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:src="@android:drawable/ic_menu_edit"
-                        app:tint="#E74C3C" />
+                    android:paddingVertical="16dp"
+                    android:paddingHorizontal="8dp"
+                    android:layout_margin="6dp"
+                    android:clickable="true"
+                    android:focusable="true">
+                    
+                    <FrameLayout
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:background="@drawable/circle_icon_bg"
+                        android:backgroundTint="#FFE4E6">
+                        
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_menu_letter"
+                            app:tint="#E11D48"
+                            android:contentDescription="Buat Surat" />
+                    </FrameLayout>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Buat Surat"
                         android:textSize="12sp"
-                        android:textColor="#424242"
+                        android:textStyle="bold"
+                        android:textColor="@color/text_primary"
                         android:layout_marginTop="8dp" />
                 </LinearLayout>
 
+                <!-- 2. Info Desa -->
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -175,22 +214,37 @@
                     android:orientation="vertical"
                     android:gravity="center"
                     android:background="@drawable/bg_card_menu"
-                    android:padding="16dp"
-                    android:layout_margin="8dp">
-                    <ImageView
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:src="@android:drawable/ic_menu_info_details"
-                        app:tint="#2ECC71" />
+                    android:paddingVertical="16dp"
+                    android:paddingHorizontal="8dp"
+                    android:layout_margin="6dp"
+                    android:clickable="true"
+                    android:focusable="true">
+                    
+                    <FrameLayout
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:background="@drawable/circle_icon_bg"
+                        android:backgroundTint="#DBEAFE">
+                        
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_menu_info"
+                            app:tint="#2563EB"
+                            android:contentDescription="Info Desa" />
+                    </FrameLayout>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Info Desa"
                         android:textSize="12sp"
-                        android:textColor="#424242"
+                        android:textStyle="bold"
+                        android:textColor="@color/text_primary"
                         android:layout_marginTop="8dp" />
                 </LinearLayout>
 
+                <!-- 3. Pengaduan -->
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -198,22 +252,37 @@
                     android:orientation="vertical"
                     android:gravity="center"
                     android:background="@drawable/bg_card_menu"
-                    android:padding="16dp"
-                    android:layout_margin="8dp">
-                    <ImageView
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:src="@android:drawable/ic_menu_report_image"
-                        app:tint="#F39C12" />
+                    android:paddingVertical="16dp"
+                    android:paddingHorizontal="8dp"
+                    android:layout_margin="6dp"
+                    android:clickable="true"
+                    android:focusable="true">
+                    
+                    <FrameLayout
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:background="@drawable/circle_icon_bg"
+                        android:backgroundTint="#FEF3C7">
+                        
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_menu_complaint"
+                            app:tint="#D97706"
+                            android:contentDescription="Pengaduan" />
+                    </FrameLayout>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Pengaduan"
                         android:textSize="12sp"
-                        android:textColor="#424242"
+                        android:textStyle="bold"
+                        android:textColor="@color/text_primary"
                         android:layout_marginTop="8dp" />
                 </LinearLayout>
 
+                <!-- 4. Galeri -->
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -221,22 +290,37 @@
                     android:orientation="vertical"
                     android:gravity="center"
                     android:background="@drawable/bg_card_menu"
-                    android:padding="16dp"
-                    android:layout_margin="8dp">
-                    <ImageView
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:src="@android:drawable/ic_menu_gallery"
-                        app:tint="#9B59B6" />
+                    android:paddingVertical="16dp"
+                    android:paddingHorizontal="8dp"
+                    android:layout_margin="6dp"
+                    android:clickable="true"
+                    android:focusable="true">
+                    
+                    <FrameLayout
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:background="@drawable/circle_icon_bg"
+                        android:backgroundTint="#EDE9FE">
+                        
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_menu_gallery_custom"
+                            app:tint="#7C3AED"
+                            android:contentDescription="Galeri" />
+                    </FrameLayout>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Galeri"
                         android:textSize="12sp"
-                        android:textColor="#424242"
+                        android:textStyle="bold"
+                        android:textColor="@color/text_primary"
                         android:layout_marginTop="8dp" />
                 </LinearLayout>
 
+                <!-- 5. Peta Desa -->
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -244,22 +328,37 @@
                     android:orientation="vertical"
                     android:gravity="center"
                     android:background="@drawable/bg_card_menu"
-                    android:padding="16dp"
-                    android:layout_margin="8dp">
-                    <ImageView
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:src="@android:drawable/ic_menu_mapmode"
-                        app:tint="#1ABC9C" />
+                    android:paddingVertical="16dp"
+                    android:paddingHorizontal="8dp"
+                    android:layout_margin="6dp"
+                    android:clickable="true"
+                    android:focusable="true">
+                    
+                    <FrameLayout
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:background="@drawable/circle_icon_bg"
+                        android:backgroundTint="#D1FAE5">
+                        
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_menu_map"
+                            app:tint="#059669"
+                            android:contentDescription="Peta Desa" />
+                    </FrameLayout>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Peta Desa"
                         android:textSize="12sp"
-                        android:textColor="#424242"
+                        android:textStyle="bold"
+                        android:textColor="@color/text_primary"
                         android:layout_marginTop="8dp" />
                 </LinearLayout>
 
+                <!-- 6. Bantuan -->
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -267,23 +366,96 @@
                     android:orientation="vertical"
                     android:gravity="center"
                     android:background="@drawable/bg_card_menu"
-                    android:padding="16dp"
-                    android:layout_margin="8dp">
-                    <ImageView
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:src="@android:drawable/ic_menu_help"
-                        app:tint="#34495E" />
+                    android:paddingVertical="16dp"
+                    android:paddingHorizontal="8dp"
+                    android:layout_margin="6dp"
+                    android:clickable="true"
+                    android:focusable="true">
+                    
+                    <FrameLayout
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:background="@drawable/circle_icon_bg"
+                        android:backgroundTint="#F1F5F9">
+                        
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_menu_help_custom"
+                            app:tint="#475569"
+                            android:contentDescription="Bantuan" />
+                    </FrameLayout>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Bantuan"
                         android:textSize="12sp"
-                        android:textColor="#424242"
+                        android:textStyle="bold"
+                        android:textColor="@color/text_primary"
                         android:layout_marginTop="8dp" />
                 </LinearLayout>
-
             </GridLayout>
+
+            <!-- Announcement Card -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="2dp"
+                app:strokeColor="@color/border"
+                app:strokeWidth="1dp"
+                app:cardBackgroundColor="@color/white"
+                android:layout_marginBottom="24dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_marginBottom="12dp">
+
+                        <ImageView
+                            android:layout_width="18dp"
+                            android:layout_height="18dp"
+                            android:src="@drawable/ic_menu_info"
+                            app:tint="@color/accent"
+                            android:contentDescription="Announcement Icon" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:text="PENGUMUMAN"
+                            android:textStyle="bold"
+                            android:textColor="@color/accent"
+                            android:textSize="11sp"
+                            android:letterSpacing="0.1" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Jadwal Gotong Royong Mingguan"
+                        android:textStyle="bold"
+                        android:textColor="@color/text_primary"
+                        android:textSize="16sp"
+                        android:layout_marginBottom="6dp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Diharapkan seluruh warga RW 03 untuk kumpul di balai desa pada hari Minggu..."
+                        android:textColor="@color/text_secondary"
+                        android:textSize="14sp" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
 
             <TextView
                 android:layout_width="wrap_content"

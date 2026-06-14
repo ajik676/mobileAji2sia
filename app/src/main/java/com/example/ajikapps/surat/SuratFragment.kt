@@ -1,14 +1,28 @@
 package com.example.ajikapps.surat
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.ajikapps.R
+import com.example.ajikapps.database.AppDatabase
+import com.example.ajikapps.database.SuratRequestEntity
+import com.example.ajikapps.database.SuratServiceEntity
+import com.example.ajikapps.databinding.DialogApplySuratBinding
 import com.example.ajikapps.databinding.FragmentSuratBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class SuratFragment : Fragment() {
 
@@ -26,69 +40,43 @@ class SuratFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        setupRecyclerView()
+        loadServicesFromDb()
     }
 
-    private fun setupRecyclerView() {
-        val listSurat = listOf(
-            SuratModel(
-                1,
-                "Surat Keterangan Domisili",
-                "Keterangan domisili penduduk.",
-                R.drawable.ic_domisili,
-                "• Kartu Tanda Penduduk (KTP)\n• Kartu Keluarga (KK)\n• Surat pengantar dari RT/RW setempat"
-            ),
-            SuratModel(
-                2,
-                "Surat Keterangan Usaha",
-                "Keterangan kepemilikan usaha.",
-                R.drawable.ic_usaha,
-                "• KTP & KK Pemohon\n• Surat Pengantar RT/RW\n• Foto Tempat/Objek Usaha\n• Surat pernyataan kepemilikan usaha"
-            ),
-            SuratModel(
-                3,
-                "Surat Pengantar SKCK",
-                "Pengantar pembuatan SKCK.",
-                R.drawable.ic_skck,
-                "• KTP & KK Pemohon\n• Surat Pengantar RT/RW\n• Pas foto 4x6 latar belakang merah (2 lembar)"
-            ),
-            SuratModel(
-                4,
-                "Surat Keterangan Tidak Mampu",
-                "Keterangan kondisi tidak mampu.",
-                R.drawable.ic_tidak_mampu,
-                "• KTP & KK Pemohon\n• Surat Pengantar RT/RW\n• Surat pernyataan tidak mampu bermaterai\n• Bukti slip gaji/keterangan penghasilan RT"
-            ),
-            SuratModel(
-                5,
-                "Surat Kelahiran",
-                "Pencatatan kelahiran baru.",
-                R.drawable.ic_kelahiran,
-                "• KTP Suami & Istri\n• Kartu Keluarga (KK)\n• Surat keterangan lahir dari bidan/rumah sakit\n• KTP 2 orang saksi kelahiran"
-            ),
-            SuratModel(
-                6,
-                "Surat Kematian",
-                "Pencatatan kematian warga.",
-                R.drawable.ic_kematian,
-                "• KTP & KK jenazah\n• KTP pelapor (ahli waris)\n• Surat keterangan kematian dari rumah sakit/RT setempat"
-            ),
-            SuratModel(
-                7,
-                "Surat Pindah Penduduk",
-                "Keterangan pindah domisili.",
-                R.drawable.ic_pindah,
-                "• Kartu Keluarga (KK) asli\n• KTP pemohon asli\n• Alamat lengkap daerah tujuan pindah\n• Pas foto 3x4 (3 lembar)"
-            ),
-            SuratModel(
-                8,
-                "Surat Pengantar Nikah",
-                "Pengantar nikah KUA.",
-                R.drawable.ic_nikah,
-                "• KTP & KK calon mempelai\n• KTP orang tua kandung\n• Akta kelahiran calon mempelai\n• Surat Pengantar RT/RW\n• Pas foto 2x3 latar biru (4 lembar)"
+    private fun loadServicesFromDb() {
+        lifecycleScope.launch(Dispatchers.IO) {
+            val db = AppDatabase.getDatabase(requireContext())
+            var services = db.suratDao().getAllServices()
+            
+            // Handle first-launch latency in prepopulation
+            if (services.isEmpty()) {
+                delay(300)
+                services = db.suratDao().getAllServices()
+            }
+            
+            withContext(Dispatchers.Main) {
+                if (isAdded) {
+                    setupRecyclerView(services)
+                }
+            }
+        }
+    }
+
+    private fun setupRecyclerView(services: List<SuratServiceEntity>) {
+        val listSurat = services.map { entity ->
+            val iconResId = requireContext().resources.getIdentifier(
+                entity.iconName,
+                "drawable",
+                requireContext().packageName
             )
-        )
+            SuratModel(
+                id = entity.id,
+                title = entity.title,
+                description = entity.description,
+                iconRes = if (iconResId != 0) iconResId else R.drawable.ic_mail,
+                requirements = entity.requirements
+            )
+        }
 
         val suratAdapter = SuratGridAdapter(listSurat) { surat ->
             showDetailDialog(surat)
@@ -105,10 +93,90 @@ class SuratFragment : Fragment() {
             .setIcon(surat.iconRes)
             .setTitle("Syarat ${surat.title}")
             .setMessage("Berikut adalah berkas persyaratan yang wajib disiapkan:\n\n${surat.requirements}")
-            .setPositiveButton("Tutup") { dialog, _ ->
+            .setPositiveButton("Ajukan Sekarang") { _, _ ->
+                showApplicationForm(surat)
+            }
+            .setNegativeButton("Tutup") { dialog, _ ->
                 dialog.dismiss()
             }
             .show()
+    }
+
+    private fun showApplicationForm(surat: SuratModel) {
+        val dialogBinding = DialogApplySuratBinding.inflate(layoutInflater)
+        dialogBinding.tvFormTitle.text = "Form Pengajuan\n${surat.title}"
+
+        // Load default values from preferences and mock details
+        val sharedPref = requireActivity().getSharedPreferences("user_pref", Context.MODE_PRIVATE)
+        val defaultUsername = sharedPref.getString("username", "") ?: ""
+        
+        dialogBinding.etNama.setText(defaultUsername.uppercase())
+        dialogBinding.etNik.setText("3276051212990003") // Mock default NIK
+        dialogBinding.etPhone.setText("+62 812-3456-7890") // Mock default phone
+
+        val dialog = MaterialAlertDialogBuilder(requireContext())
+            .setView(dialogBinding.root)
+            .setPositiveButton("Kirim Pengajuan", null)
+            .setNegativeButton("Batal") { d, _ ->
+                d.dismiss()
+            }
+            .create()
+
+        dialog.show()
+
+        dialog.getButton(android.content.DialogInterface.BUTTON_POSITIVE).setOnClickListener {
+            val nik = dialogBinding.etNik.text.toString().trim()
+            val nama = dialogBinding.etNama.text.toString().trim()
+            val phone = dialogBinding.etPhone.text.toString().trim()
+            val keperluan = dialogBinding.etKeperluan.text.toString().trim()
+
+            if (nik.length < 16) {
+                dialogBinding.etNik.error = "NIK harus 16 digit"
+                return@setOnClickListener
+            }
+            if (nama.isEmpty()) {
+                dialogBinding.etNama.error = "Nama wajib diisi"
+                return@setOnClickListener
+            }
+            if (phone.isEmpty()) {
+                dialogBinding.etPhone.error = "Nomor telepon wajib diisi"
+                return@setOnClickListener
+            }
+            if (keperluan.isEmpty()) {
+                dialogBinding.etKeperluan.error = "Keperluan wajib diisi"
+                return@setOnClickListener
+            }
+
+            // Save to Room Database
+            val sdf = SimpleDateFormat("dd MMM yyyy, HH:mm", Locale.getDefault())
+            val currentDate = sdf.format(Date())
+
+            val request = SuratRequestEntity(
+                serviceId = surat.id,
+                serviceTitle = surat.title,
+                username = defaultUsername,
+                nik = nik,
+                fullName = nama,
+                phone = phone,
+                purpose = keperluan,
+                status = "Diproses",
+                date = currentDate
+            )
+
+            lifecycleScope.launch(Dispatchers.IO) {
+                val db = AppDatabase.getDatabase(requireContext())
+                db.suratDao().insertRequest(request)
+
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(
+                        requireContext(),
+                        "Pengajuan ${surat.title} Berhasil Dikirim!",
+                        Toast.LENGTH_LONG
+                    ).show()
+                    dialog.dismiss()
+                }
+            }
+        }
     }
 
     override fun onDestroyView() {

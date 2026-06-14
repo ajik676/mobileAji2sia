@@ -11,6 +11,7 @@ import com.example.ajikapps.databinding.ActivityBaseBinding
 import com.example.ajikapps.surat.SuratFragment
 import com.example.ajikapps.home.HomeFragment
 import com.example.ajikapps.profile.ProfileFragment
+import com.example.ajikapps.list.ListFragment
 
 class BaseActivity : AppCompatActivity() {
 
@@ -54,6 +55,10 @@ class BaseActivity : AppCompatActivity() {
                 }
                 R.id.surat -> {
                     replaceFragment(SuratFragment())
+                    true
+                }
+                R.id.list -> {
+                    replaceFragment(ListFragment())
                     true
                 }
                 R.id.profile -> {
