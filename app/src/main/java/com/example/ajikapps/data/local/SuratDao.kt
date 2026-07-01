@@ -1,4 +1,4 @@
-package com.example.ajikapps.database
+package com.example.ajikapps.data.local
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
@@ -25,6 +25,9 @@ interface SuratDao {
 
     @Query("SELECT * FROM surat_requests WHERE username = :username ORDER BY id DESC")
     fun getRequestsByUsername(username: String): LiveData<List<SuratRequestEntity>>
+
+    @Query("SELECT * FROM surat_requests WHERE id = :id")
+    suspend fun getRequestById(id: Int): SuratRequestEntity?
 
     @Delete
     suspend fun deleteRequest(request: SuratRequestEntity)

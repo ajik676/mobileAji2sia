@@ -1,4 +1,4 @@
-package com.example.ajikapps.network
+package com.example.ajikapps.data.remote
 
 import com.example.ajikapps.home.PostResponse
 import retrofit2.http.GET

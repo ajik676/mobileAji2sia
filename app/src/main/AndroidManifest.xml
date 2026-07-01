@@ -4,6 +4,9 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-feature android:name="android.hardware.camera" android:required="false" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
     <application
         android:allowBackup="true"
@@ -45,6 +48,18 @@
             android:exported="false" />
         <activity
             android:name=".AuthActivity"
+            android:exported="false" />
+        
+        <activity
+            android:name="com.journeyapps.barcodescanner.CaptureActivity"
+            android:screenOrientation="portrait"
+            tools:replace="android:screenOrientation"
+            android:stateNotNeeded="true"
+            android:theme="@style/zxing_CaptureTheme" />
+
+        <receiver
+            android:name=".notification.ReminderReceiver"
+            android:enabled="true"
             android:exported="false" />
     </application>
 

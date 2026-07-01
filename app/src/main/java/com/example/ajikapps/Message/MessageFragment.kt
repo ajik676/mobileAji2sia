@@ -1,4 +1,4 @@
-package com.example.ajikapps.Message
+package com.example.ajikapps.message
 
 import android.content.Intent
 import android.os.Bundle
@@ -11,8 +11,8 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.ajikapps.R
-import com.example.ajikapps.Message.tutorial.TutorialAdapter
-import com.example.ajikapps.Message.tutorial.TutorialMessageActivity
+import com.example.ajikapps.message.tutorial.TutorialAdapter
+import com.example.ajikapps.message.tutorial.TutorialMessageActivity
 import com.example.ajikapps.databinding.FragmentMessageBinding
 import com.google.android.material.tabs.TabLayoutMediator
 

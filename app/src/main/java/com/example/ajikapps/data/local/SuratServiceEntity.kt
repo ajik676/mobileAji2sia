@@ -1,4 +1,4 @@
-package com.example.ajikapps.database
+package com.example.ajikapps.data.local
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

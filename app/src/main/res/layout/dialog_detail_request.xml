@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="24dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
+
+        <!-- Title of Letter -->
+        <TextView
+            android:id="@+id/tvDetailTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Detail Pengajuan Surat"
+            android:textAlignment="center"
+            android:textColor="@color/text_primary"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp" />
+
+        <!-- Status Badge -->
+        <TextView
+            android:id="@+id/tvDetailStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_status_pill"
+            android:backgroundTint="@color/primary_light"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="6dp"
+            android:text="Diproses"
+            android:textColor="@color/primary_dark"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="16dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/light_gray"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Information Fields -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="16dp">
+
+            <!-- NIK -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="NIK Pemohon"
+                android:textColor="@color/text_secondary"
+                android:textSize="12sp" />
+            <TextView
+                android:id="@+id/tvDetailNik"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="3276051212990003"
+                android:textColor="@color/text_primary"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="12dp" />
+
+            <!-- Nama -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nama Lengkap"
+                android:textColor="@color/text_secondary"
+                android:textSize="12sp" />
+            <TextView
+                android:id="@+id/tvDetailNama"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="AHMAD JALALUDIN"
+                android:textColor="@color/text_primary"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="12dp" />
+
+            <!-- Telepon -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nomor Telepon"
+                android:textColor="@color/text_secondary"
+                android:textSize="12sp" />
+            <TextView
+                android:id="@+id/tvDetailPhone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="+62 812-3456-7890"
+                android:textColor="@color/text_primary"
+                android:textSize="15sp"
+                android:layout_marginBottom="12dp" />
+
+            <!-- Keperluan -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Keperluan / Alasan"
+                android:textColor="@color/text_secondary"
+                android:textSize="12sp" />
+            <TextView
+                android:id="@+id/tvDetailKeperluan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Untuk persyaratan kelengkapan pernikahan."
+                android:textColor="@color/text_primary"
+                android:textSize="15sp"
+                android:layout_marginBottom="12dp" />
+
+            <!-- Tanggal -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Waktu Pengajuan"
+                android:textColor="@color/text_secondary"
+                android:textSize="12sp" />
+            <TextView
+                android:id="@+id/tvDetailDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="14 Jun 2026, 21:15"
+                android:textColor="@color/text_primary"
+                android:textSize="15sp"
+                android:layout_marginBottom="16dp" />
+        </LinearLayout>
+
+        <!-- Document Photo Section -->
+        <TextView
+            android:id="@+id/tvLabelPhoto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Dokumen Lampiran (KTP/KK)"
+            android:textColor="@color/text_secondary"
+            android:textSize="12sp"
+            android:layout_marginBottom="6dp" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardDetailPhoto"
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:layout_marginBottom="24dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="0dp"
+            app:strokeColor="@color/border"
+            app:strokeWidth="1dp">
+
+            <ImageView
+                android:id="@+id/ivDetailPhoto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop" />
+        </com.google.android.material.card.MaterialCardView>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/light_gray"
+            android:layout_marginBottom="16dp" />
+
+        <!-- QR Code Section -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="KODE VERIFIKASI DIGITAL (QR)"
+            android:textColor="@color/primary"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:letterSpacing="0.1"
+            android:layout_marginBottom="8dp" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="180dp"
+            android:layout_height="180dp"
+            android:layout_marginBottom="8dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="2dp"
+            app:strokeColor="@color/border"
+            app:strokeWidth="1dp">
+
+            <ImageView
+                android:id="@+id/ivDetailQr"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="12dp" />
+        </com.google.android.material.card.MaterialCardView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pindai QR ini untuk verifikasi keabsahan surat"
+            android:textColor="@color/text_secondary"
+            android:textSize="11sp"
+            android:layout_marginBottom="20dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSetReminder"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="Atur Pengingat Cek Status"
+            app:icon="@android:drawable/ic_lock_idle_alarm"
+            app:iconTint="@color/primary"
+            android:textColor="@color/primary"
+            app:strokeColor="@color/primary"
+            app:strokeWidth="1.5dp"
+            android:layout_marginBottom="12dp" />
+
+    </LinearLayout>
+</ScrollView>

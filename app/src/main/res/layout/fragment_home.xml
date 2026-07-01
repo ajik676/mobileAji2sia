@@ -624,4 +624,16 @@
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>
 
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/fabScanQR"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="20dp"
+        android:text="Verifikasi QR"
+        app:icon="@android:drawable/ic_menu_camera"
+        android:textColor="@color/white"
+        app:backgroundTint="@color/primary"
+        app:iconTint="@color/white" />
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

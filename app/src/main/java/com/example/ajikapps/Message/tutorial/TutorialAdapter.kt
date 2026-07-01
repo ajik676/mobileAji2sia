@@ -1,8 +1,7 @@
-package com.example.ajikapps.Message.tutorial
+package com.example.ajikapps.message.tutorial
 
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.example.ajikapps.Message.MessageFragment
 
 class TutorialAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
     override fun getItemCount(): Int = 3

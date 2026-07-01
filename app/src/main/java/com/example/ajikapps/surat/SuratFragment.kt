@@ -1,25 +1,36 @@
 package com.example.ajikapps.surat
 
+import android.Manifest
 import android.content.Context
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.os.Build
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.ajikapps.R
-import com.example.ajikapps.database.AppDatabase
-import com.example.ajikapps.database.SuratRequestEntity
-import com.example.ajikapps.database.SuratServiceEntity
+import com.example.ajikapps.data.local.AppDatabase
+import com.example.ajikapps.data.local.SuratRequestEntity
+import com.example.ajikapps.data.local.SuratServiceEntity
 import com.example.ajikapps.databinding.DialogApplySuratBinding
 import com.example.ajikapps.databinding.FragmentSuratBinding
+import com.example.ajikapps.notification.NotificationHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.io.File
+import java.io.FileOutputStream
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -28,6 +39,39 @@ class SuratFragment : Fragment() {
 
     private var _binding: FragmentSuratBinding? = null
     private val binding get() = _binding!!
+
+    private var capturedPhotoPath: String? = null
+    private var currentDialogBinding: DialogApplySuratBinding? = null
+
+    // Camera Result Launcher
+    private val cameraLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (result.resultCode == android.app.Activity.RESULT_OK) {
+            val bitmap = result.data?.extras?.get("data") as? Bitmap
+            if (bitmap != null) {
+                saveBitmapToCache(bitmap)
+            } else {
+                Toast.makeText(requireContext(), "Gagal memproses foto", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    // Camera Permission Launcher
+    private val permissionLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { isGranted ->
+        if (isGranted) {
+            launchCamera()
+        } else {
+            Toast.makeText(requireContext(), "Izin kamera diperlukan untuk mengambil foto", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    // Notification Permission Launcher
+    private val notificationPermissionLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { _ -> }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -104,6 +148,9 @@ class SuratFragment : Fragment() {
 
     private fun showApplicationForm(surat: SuratModel) {
         val dialogBinding = DialogApplySuratBinding.inflate(layoutInflater)
+        currentDialogBinding = dialogBinding
+        capturedPhotoPath = null // Reset photo path for new form
+
         dialogBinding.tvFormTitle.text = "Form Pengajuan\n${surat.title}"
 
         // Load default values from preferences and mock details
@@ -113,6 +160,14 @@ class SuratFragment : Fragment() {
         dialogBinding.etNama.setText(defaultUsername.uppercase())
         dialogBinding.etNik.setText("3276051212990003") // Mock default NIK
         dialogBinding.etPhone.setText("+62 812-3456-7890") // Mock default phone
+
+        // Setup capture photo button
+        dialogBinding.btnCapturePhoto.setOnClickListener {
+            checkPermissionAndLaunchCamera()
+        }
+
+        // Request notification permission on Android 13+
+        checkNotificationPermission()
 
         val dialog = MaterialAlertDialogBuilder(requireContext())
             .setView(dialogBinding.root)
@@ -146,6 +201,10 @@ class SuratFragment : Fragment() {
                 dialogBinding.etKeperluan.error = "Keperluan wajib diisi"
                 return@setOnClickListener
             }
+            if (capturedPhotoPath == null) {
+                Toast.makeText(requireContext(), "Harap ambil foto KTP/KK terlebih dahulu!", Toast.LENGTH_LONG).show()
+                return@setOnClickListener
+            }
 
             // Save to Room Database
             val sdf = SimpleDateFormat("dd MMM yyyy, HH:mm", Locale.getDefault())
@@ -160,7 +219,8 @@ class SuratFragment : Fragment() {
                 phone = phone,
                 purpose = keperluan,
                 status = "Diproses",
-                date = currentDate
+                date = currentDate,
+                documentPhotoPath = capturedPhotoPath
             )
 
             lifecycleScope.launch(Dispatchers.IO) {
@@ -173,14 +233,92 @@ class SuratFragment : Fragment() {
                         "Pengajuan ${surat.title} Berhasil Dikirim!",
                         Toast.LENGTH_LONG
                     ).show()
+                    
+                    // Trigger immediate success notification
+                    triggerInstantNotification(surat.title)
+                    
                     dialog.dismiss()
                 }
             }
         }
     }
 
+    private fun checkPermissionAndLaunchCamera() {
+        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA)
+            == PackageManager.PERMISSION_GRANTED) {
+            launchCamera()
+        } else {
+            permissionLauncher.launch(Manifest.permission.CAMERA)
+        }
+    }
+
+    private fun launchCamera() {
+        val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        cameraLauncher.launch(cameraIntent)
+    }
+
+    private fun saveBitmapToCache(bitmap: Bitmap) {
+        lifecycleScope.launch(Dispatchers.IO) {
+            try {
+                val cacheDir = requireContext().cacheDir
+                val file = File(cacheDir, "document_${System.currentTimeMillis()}.jpg")
+                val fos = FileOutputStream(file)
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 90, fos)
+                fos.flush()
+                fos.close()
+
+                capturedPhotoPath = file.absolutePath
+
+                withContext(Dispatchers.Main) {
+                    currentDialogBinding?.let { binding ->
+                        binding.cardPhotoPreview.visibility = View.VISIBLE
+                        binding.ivPhotoPreview.setImageBitmap(bitmap)
+                    }
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(requireContext(), "Gagal menyimpan foto", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
+
+    private fun checkNotificationPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            val permission = Manifest.permission.POST_NOTIFICATIONS
+            if (ContextCompat.checkSelfPermission(requireContext(), permission)
+                != PackageManager.PERMISSION_GRANTED
+            ) {
+                notificationPermissionLauncher.launch(permission)
+            }
+        }
+    }
+
+    private fun triggerInstantNotification(letterTitle: String) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            val permission = Manifest.permission.POST_NOTIFICATIONS
+            if (ContextCompat.checkSelfPermission(requireContext(), permission)
+                == PackageManager.PERMISSION_GRANTED
+            ) {
+                NotificationHelper.showInstantNotification(
+                    requireContext(),
+                    "📝 Pengajuan Surat Terkirim",
+                    "Pengajuan untuk $letterTitle telah sukses dikirim ke Balai Desa."
+                )
+            }
+        } else {
+            NotificationHelper.showInstantNotification(
+                requireContext(),
+                "📝 Pengajuan Surat Terkirim",
+                "Pengajuan untuk $letterTitle telah sukses dikirim ke Balai Desa."
+            )
+        }
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
+        currentDialogBinding = null
         _binding = null
     }
 }

@@ -1,4 +1,4 @@
-package com.example.ajikapps.Message.tutorial
+package com.example.ajikapps.message.tutorial
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

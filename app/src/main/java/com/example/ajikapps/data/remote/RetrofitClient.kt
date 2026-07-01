@@ -1,16 +1,16 @@
-package com.example.ajikapps.data.api
+package com.example.ajikapps.data.remote
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-object PhotoApiClient {
-    private const val BASE_URL = "https://picsum.photos/v2/"
+object RetrofitClient {
+    private const val BASE_URL = "https://jsonplaceholder.typicode.com/"
 
-    val apiService: PhotoApiService by lazy {
+    val apiService: ApiService by lazy {
         Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-            .create(PhotoApiService::class.java)
+            .create(ApiService::class.java)
     }
 }

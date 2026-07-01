@@ -1,18 +1,31 @@
 package com.example.ajikapps.home
 
+import android.Manifest
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.ajikapps.R
 import com.example.ajikapps.SplashScreenActivity
+import com.example.ajikapps.data.local.AppDatabase
+import com.example.ajikapps.data.local.SuratRequestEntity
 import com.example.ajikapps.databinding.FragmentHomeBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.zxing.integration.android.IntentIntegrator
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class HomeFragment : Fragment() {
 
@@ -21,6 +34,17 @@ class HomeFragment : Fragment() {
 
     private lateinit var newsViewModel: NewsViewModel
     private lateinit var beritaAdapter: BeritaAdapter
+
+    // Permission result launcher for scanner
+    private val requestCameraPermissionLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { isGranted ->
+        if (isGranted) {
+            startQrScanner()
+        } else {
+            Toast.makeText(requireContext(), "Izin kamera dibutuhkan untuk memindai QR Code", Toast.LENGTH_SHORT).show()
+        }
+    }
 
     companion object {
         fun newInstance(username: String): HomeFragment {
@@ -65,13 +89,12 @@ class HomeFragment : Fragment() {
             newsViewModel.fetchNews()
         }
 
-        // 6. Tombol Logout (Tetap menggunakan btnLogout dari XML baru)
+        // 6. Tombol Logout
         binding.btnLogout.setOnClickListener {
             AlertDialog.Builder(requireContext())
                 .setTitle("Konfirmasi Keluar")
                 .setMessage("Yakin ingin keluar dari akun Anda?")
                 .setPositiveButton("Ya") { dialog, _ ->
-
                     // Hapus sesi user
                     sharedPref.edit().clear().apply()
                     dialog.dismiss()
@@ -87,6 +110,11 @@ class HomeFragment : Fragment() {
                 }
                 .setNegativeButton("Tidak", null)
                 .show()
+        }
+
+        // 7. QR Scan floating action button
+        binding.fabScanQR.setOnClickListener {
+            checkCameraPermissionAndStartScan()
         }
     }
 
@@ -134,6 +162,98 @@ class HomeFragment : Fragment() {
 
         // Ambil berita saat awal dimuat
         newsViewModel.fetchNews()
+    }
+
+    private fun checkCameraPermissionAndStartScan() {
+        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA)
+            == PackageManager.PERMISSION_GRANTED) {
+            startQrScanner()
+        } else {
+            requestCameraPermissionLauncher.launch(Manifest.permission.CAMERA)
+        }
+    }
+
+    private fun startQrScanner() {
+        val integrator = IntentIntegrator.forSupportFragment(this)
+        integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE)
+        integrator.setPrompt("Scan QR Code Verifikasi Surat")
+        integrator.setCameraId(0) // Gunakan kamera belakang
+        integrator.setBeepEnabled(true)
+        integrator.setBarcodeImageEnabled(true)
+        integrator.setCaptureActivity(com.journeyapps.barcodescanner.CaptureActivity::class.java)
+        integrator.initiateScan()
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        val result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
+        if (result != null) {
+            if (result.contents == null) {
+                Toast.makeText(requireContext(), "Pemindaian dibatalkan", Toast.LENGTH_SHORT).show()
+            } else {
+                verifyScannedSurat(result.contents)
+            }
+        } else {
+            super.onActivityResult(requestCode, resultCode, data)
+        }
+    }
+
+    private fun verifyScannedSurat(contents: String) {
+        if (contents.startsWith("ajikapps://verify?id=")) {
+            val idStr = contents.substringAfter("id=")
+            val id = idStr.toIntOrNull()
+            if (id != null) {
+                lifecycleScope.launch(Dispatchers.IO) {
+                    val db = AppDatabase.getDatabase(requireContext())
+                    val request = db.suratDao().getRequestById(id)
+
+                    withContext(Dispatchers.Main) {
+                        if (request != null) {
+                            showVerificationSuccessDialog(request)
+                        } else {
+                            showVerificationErrorDialog("Dokumen dengan ID #$id tidak ditemukan dalam sistem database desa.")
+                        }
+                    }
+                }
+            } else {
+                showVerificationErrorDialog("Kode QR tidak valid atau korup.")
+            }
+        } else {
+            showVerificationErrorDialog("QR Code bukan format Surat Desa yang valid.")
+        }
+    }
+
+    private fun showVerificationSuccessDialog(request: SuratRequestEntity) {
+        val details = """
+            Status: VALID & TERVERIFIKASI (OK)
+            
+            • Jenis Surat: ${request.serviceTitle}
+            • Pemohon: ${request.fullName.uppercase()}
+            • NIK: ${request.nik}
+            • No Telepon: ${request.phone}
+            • Keperluan: ${request.purpose}
+            • Tanggal Pengajuan: ${request.date}
+            • Status Saat Ini: ${request.status}
+        """.trimIndent()
+
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle("Hasil Verifikasi: VALID")
+            .setIcon(android.R.drawable.ic_dialog_info)
+            .setMessage(details)
+            .setPositiveButton("Selesai") { dialog, _ ->
+                dialog.dismiss()
+            }
+            .show()
+    }
+
+    private fun showVerificationErrorDialog(errorMessage: String) {
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle("Hasil Verifikasi: GAGAL")
+            .setIcon(android.R.drawable.ic_dialog_alert)
+            .setMessage(errorMessage)
+            .setPositiveButton("Tutup") { dialog, _ ->
+                dialog.dismiss()
+            }
+            .show()
     }
 
     override fun onDestroyView() {

@@ -1,4 +1,4 @@
-package com.example.ajikapps.database
+package com.example.ajikapps.data.local
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -14,5 +14,6 @@ data class SuratRequestEntity(
     val phone: String,
     val purpose: String,
     val status: String,
-    val date: String
+    val date: String,
+    val documentPhotoPath: String? = null // New field for Camera Capture
 )

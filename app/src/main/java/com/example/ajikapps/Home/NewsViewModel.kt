@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.ajikapps.network.RetrofitClient
+import com.example.ajikapps.data.remote.RetrofitClient
 import kotlinx.coroutines.launch
 
 sealed class NewsState {

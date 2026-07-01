@@ -6,12 +6,13 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ajikapps.R
-import com.example.ajikapps.database.SuratRequestEntity
+import com.example.ajikapps.data.local.SuratRequestEntity
 import com.example.ajikapps.databinding.ItemRequestListBinding
 
 class RequestListAdapter(
     private var items: List<SuratRequestEntity>,
-    private val onDeleteClick: (SuratRequestEntity) -> Unit
+    private val onDeleteClick: (SuratRequestEntity) -> Unit,
+    private val onItemClick: (SuratRequestEntity) -> Unit
 ) : RecyclerView.Adapter<RequestListAdapter.RequestViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RequestViewHolder {
@@ -69,8 +70,14 @@ class RequestListAdapter(
                 binding.tvStatus.setTextColor(Color.parseColor("#0F766E")) // Dark Teal
             }
 
+            // Click listener for the delete button
             binding.btnDelete.setOnClickListener {
                 onDeleteClick(item)
+            }
+
+            // Click listener for the card to view details & QR
+            binding.root.setOnClickListener {
+                onItemClick(item)
             }
         }
     }

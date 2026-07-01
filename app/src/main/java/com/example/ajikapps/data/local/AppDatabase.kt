@@ -1,4 +1,4 @@
-package com.example.ajikapps.database
+package com.example.ajikapps.data.local
 
 import android.content.Context
 import androidx.room.Database
@@ -25,6 +25,7 @@ abstract class AppDatabase : RoomDatabase() {
                     AppDatabase::class.java,
                     "bina_desa_db"
                 )
+                .fallbackToDestructiveMigration() // Handle database structure changes
                 .addCallback(object : RoomDatabase.Callback() {
                     override fun onCreate(db: SupportSQLiteDatabase) {
                         super.onCreate(db)

@@ -1,4 +1,4 @@
-package com.example.ajikapps.Message.tutorial
+package com.example.ajikapps.message.tutorial
 
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter

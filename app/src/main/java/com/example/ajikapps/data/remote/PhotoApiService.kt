@@ -1,4 +1,4 @@
-package com.example.ajikapps.data.api
+package com.example.ajikapps.data.remote
 
 import com.example.ajikapps.data.model.PhotoModel
 import retrofit2.http.GET
